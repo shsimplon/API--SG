@@ -7,15 +7,17 @@ import Profil from '../../pages/Profil';
 import RajouterRecette from '../../pages/RajouterRecette';
 import Recette from '../../pages/Recette';
 import Restaurant from '../../pages/Restaurant';
+import Navbar from '../Navbar';
 
 
 
 
 const index = () => {
     return (
+       
        <Router>
          
-          
+         <Navbar/>  
 <Switch>
 <Route path="/" exact component={Accueil}/>
 <Route path="/restaurants" exact component={Restaurant}/>

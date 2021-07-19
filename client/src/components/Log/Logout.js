@@ -4,6 +4,7 @@ import cookie from "js-cookie"
 
 const Logout = () => {
     const removeCookie = (key) => {
+      // petite sécurité
         if (window !== "undefined") {
           cookie.remove(key, { expires: 1 });
         }

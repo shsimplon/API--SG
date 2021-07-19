@@ -53,11 +53,17 @@ const SignUp = () => {
 
   return (
 
-
-
-
-
     <>
+    {formSubmit ? (
+      <>
+        <SignIn />
+        <span></span>
+        <h4 className="success">
+          Enregistrement réussi, veuillez-vous connecter
+        </h4>
+      </>
+    ) : (
+
       <form action="" onSubmit={handleRegister} id="sign-up-form">
         <label htmlFor="username">username</label>
         <br />
@@ -114,7 +120,7 @@ const SignUp = () => {
         <br />
         <input type="submit" value="Valider inscription" />
       </form>
-      
+      )}
     </>
   );
 };

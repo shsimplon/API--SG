@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import cookieParser from 'cookie-parser';
 import Cookies from 'universal-cookie' ;
 const cookies=new Cookies();
 
@@ -30,6 +29,8 @@ axios({
     } else {
       cookies.set ('jwt', res.data.token, {path:'/'})
       window.location = "/rajouter-recette";
+      // window.location = "/";
+
     }
   })
   .catch((err) => {
