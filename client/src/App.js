@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import Routes from './components/Routes'
 
 function App () {
+  //stocker le user sur notre app
   const [uid, setUid] = useState (null);
   useEffect(() => {
     const fetchToken = async () => {

@@ -52,10 +52,11 @@ server.get("/", function (req, res) {
   res.status(200).send("<h1>bonjour mon projet</h1>");
 });
 // jwt
-// server.get('*', isAuth);
-// server.get('/jwtid', requireAuth, (request, response) => {
-//   response.status(200).send(response.user)
-// });
+server.get('/jwtid', requireAuth, (request, response) => {
+  response.status(200).send(response.user.id)
+});
+
+
 
  server.use("/api", routes);
 

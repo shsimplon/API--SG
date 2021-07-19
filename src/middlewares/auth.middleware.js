@@ -12,6 +12,7 @@ const isAuth = (request, response, next) => {
               throw new UnauthorizedError("You must be login");
        } else {
              const {  exp } = user;
+         
              if (Date.now() / 1000 >= exp) {
                 response.clearCookie("jwt");
                 
@@ -26,6 +27,7 @@ const isAuth = (request, response, next) => {
 
 
     });
+   
 
 }
 module.exports = isAuth;
@@ -65,20 +67,21 @@ module.exports = isAuth;
 
 
 
-//require authentification: correspondance à la base de données 
-// module.exports.requireAuth = (request, response, next) => {
-//   const token = request.cookies.jwt;
-//   if (token) {
-//     jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
-//       if (err) {
-//         console.log(err);
-//         response.send(200).json('no token')
-//       } else {
-//         console.log(user);
-//         next();
-//       }
-//     });
-//   } else {
-//     console.log('No token');
-//   }
-// };
+// require authentification: correspondance à la base de données 
+module.exports.requireAuth = (request, response, next) => {
+  const token = request.cookies.jwt;
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
+      if (err) {
+        console.log(err);
+        response.send(200).json('no token')
+      } else {
+        console.log(user.id);
+        response.user =user;
+        next();
+      }
+    });
+  } else {
+    console.log('No token');
+  }
+};

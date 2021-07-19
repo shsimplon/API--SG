@@ -44,6 +44,8 @@ router.get("/:id", isAuth,async (request, response) => {
 router.post("/login", async (request, response) => {
   try {
   const user = await getByUserName(request.body.email,request.body.password);
+  
+
    const MAXAGE = Math.floor(Date.now() / 1000) + (60 * 60); // 1 hour of expiration
   response.cookie('jwt', user.token, { maxAge: MAXAGE });
   response.status(OK).json({user:user,token:user.token});
@@ -66,10 +68,10 @@ router.delete("/:id", isAuth,async (request, response) => {
   response.status(OK).json({ message: "L'user est supprimé avec succès" });
 });
 
-// router.get("/logout/:id", async = (request, response) => {
-//   response.cookie('jwt', '', { maxAge: 1});
-//   response.redirect('/');
-// });
+router.get("/logout/:id", async = (request, response) => {
+  response.cookie('jwt', '', { maxAge: 1});
+  response.redirect('/');
+});
 
 module.exports = router;
 
