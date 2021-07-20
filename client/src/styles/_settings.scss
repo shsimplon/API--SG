@@ -1,15 +1,15 @@
-// @font-face {
-//   font-family: "font-1";
-//   src: url(./assets/fonts/JosefinSans-ExtraLight.ttf);
-// }
-// @font-face {
-//   font-family: "font-2";
-//   src: url(./assets/fonts/JosefinSans-Regular.ttf);
-// }
-// @font-face {
-//   font-family: "font-3";
-//   src: url(./assets/fonts/JosefinSans-Bold.ttf);
-// }
+@font-face {
+  font-family: "font-1";
+  src:url(./fonts/JosefinSans-ExtraLight.ttf);
+}
+@font-face {
+  font-family: "font-2";
+  src: url(./fonts/JosefinSans-Regular.ttf);
+}
+@font-face {
+  font-family: "font-3";
+  src: url(./fonts/JosefinSans-Bold.ttf);
+}
 
 $font-1: "font-1", sans-serif;
 $font-2: "font-2", serif;

@@ -7,6 +7,7 @@ import Profil from '../../pages/Profil';
 import RajouterRecette from '../../pages/RajouterRecette';
 import Recette from '../../pages/Recette';
 import Restaurant from '../../pages/Restaurant';
+import LeftNav from '../LeftNav';
 import Navbar from '../Navbar';
 
 
@@ -17,7 +18,9 @@ const index = () => {
        
        <Router>
          
-         <Navbar/>  
+         <Navbar/> 
+         <LeftNav />
+
 <Switch>
 <Route path="/" exact component={Accueil}/>
 <Route path="/restaurants" exact component={Restaurant}/>

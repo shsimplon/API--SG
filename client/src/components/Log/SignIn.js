@@ -27,6 +27,7 @@ axios({
       emailError.innerHTML = res.data.errors.email;
       passwordError.innerHTML = res.data.errors.password;
     } else {
+      //apparaittre le cookie
       cookies.set ('jwt', res.data.token, {path:'/'})
       window.location = "/rajouter-recette";
       // window.location = "/";
