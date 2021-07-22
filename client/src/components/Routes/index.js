@@ -1,38 +1,45 @@
-
-import React from 'react';
-import { BrowserRouter as Router , Redirect,  Switch , Route } from "react-router-dom";
-import Accueil from '../../pages/Accueil';
-import Patisserie from '../../pages/Patisserie';
-import Profil from '../../pages/Profil';
-import RajouterRecette from '../../pages/RajouterRecette';
-import Recette from '../../pages/Recette';
-import Restaurant from '../../pages/Restaurant';
-import LeftNav from '../LeftNav';
-import Navbar from '../Navbar';
-
-
-
+/* eslint-disable react-hooks/rules-of-hooks */
+// import React, { useContext } from "react";
+// import { UidContext } from "../AppContext";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Accueil from "../../pages/Accueil";
+import Patisserie from "../../pages/Patisserie";
+import Profil from "../../pages/Profil";
+import RajouterRecette from "../../pages/RajouterRecette";
+import Recette from "../../pages/Recette";
+import Restaurant from "../../pages/Restaurant";
+import LeftNav from "../LeftNav";
+import Navbar from "../Navbar";
 
 const index = () => {
-    return (
+  // const uid = useContext(UidContext);
+
+  return (
+    <Router>
+      <Navbar />
+      <LeftNav />
+
+      <Switch>
+        <Route path="/" exact component={Accueil} />
+        <Route path="/restaurants" exact component={Restaurant} />
+        <Route path="/patisseries" exact component={Patisserie} />
+        <Route path="/recette" exact component={Recette} />
+{/* 
+        {uid ? ( */}
+          <Route path="/rajouter-recette" exact component={RajouterRecette} />
+        // ) : (
+          <Route path="/profil" exact component={Profil} />
+          // )}
+        <Redirect to="/" />
        
-       <Router>
-         
-         <Navbar/> 
-         <LeftNav />
-
-<Switch>
-<Route path="/" exact component={Accueil}/>
-<Route path="/restaurants" exact component={Restaurant}/>
-<Route path="/patisseries"  component={Patisserie}/>
-<Route path="/recette"  component={Recette}/>
-<Route path="/profil"  component={Profil}/>
-<Route path="/rajouter-recette" exact component={RajouterRecette}/>
-
-<Redirect to='/'/>
-</Switch>
-       </Router>
-    );
+      </Switch>
+    </Router>
+  );
 };
 
 export default index;

@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
       },
       preparations: {
-        type: DataTypes.TEXT,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       image: {
@@ -27,7 +27,7 @@ module.exports = {
 
       },
       video: {
-        type: Sequelize.BLOB
+        type: Sequelize.TEXT
       },
       // userId: {
       //   type: Sequelize.UUID,

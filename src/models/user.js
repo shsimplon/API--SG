@@ -1,7 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
-const message = require('./message');
-const astuce = require('./astuce')
+
 const recette = require('./recette')
 
 
@@ -34,12 +33,12 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
     //     validate:{
     //       isEmail: {
     //         args: true,
@@ -60,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
       },
       image: {
-        type: DataTypes.BLOB,
+        type: DataTypes.TEXT,
       },
       createdAt: {
         allowNull: false,

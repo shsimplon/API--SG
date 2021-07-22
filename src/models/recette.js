@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
         // defaultValue: "./uploads/etablissements/random-.png"
       },
       video: {
-        type: DataTypes.BLOB
+        type: DataTypes.TEXT,
       },
      
       likes: {

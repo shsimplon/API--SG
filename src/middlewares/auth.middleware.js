@@ -18,17 +18,11 @@ const isAuth = (request, response, next) => {
                 
                 throw new UnauthorizedError("You must be login");
              }
-
-
              request.user =user;
              next();
-
         }
-
-
     });
    
-
 }
 module.exports = isAuth;
 

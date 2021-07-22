@@ -1,7 +1,7 @@
 const { UNAUTHORIZED } = require("../status_codes");
 
 module.exports = class UnauthorizedError extends Error {
-  constructor(message, description, ...params) {
+  constructor(message, description ,...params) {
     super(...params);
 
     if (Error.captureStackTrace) {
