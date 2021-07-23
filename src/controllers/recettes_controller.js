@@ -10,6 +10,14 @@ const recettesController = {
         },
       
         order: [["name", "ASC"]],
+        include: [
+          {
+            model: user,
+            attributes: ["username"],
+            as: "users",
+          },
+          
+        ],
       });
       return { listRecettes };
     },
@@ -20,13 +28,15 @@ const recettesController = {
             userId :machin,
           },
         attributes: { exclude: ["createdAt", "updatedAt"] },
-      // includes: [
-      //     {
-      //      model: user, as:'users',
-      //    },
-         
-      //    ],         
-         attributes: ["id", "name","userId"],
+        include: [
+          {
+            model: user,
+            attributes: ["username"],
+            as: "users",
+          },
+          
+        ],        
+          attributes: ["id", "name","userId"],
         });
         if (!Recette) {
           throw new NotFoundError("Ressource introuvable", "Cette recette n'existe pas");

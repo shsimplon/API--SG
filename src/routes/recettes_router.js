@@ -21,6 +21,8 @@ router.get("/", async (request, response) => {
  router.get("/userRecette", isAuth, async (request, response) => {
 const recette=request
   recette.userId=request.user.id;
+
+
   console.log(recette.userId)
  
  const resultat = await getOneRecette(recette.userId);
