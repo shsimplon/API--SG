@@ -3,7 +3,7 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class recette extends Model {
     static associate(models) {
-      // this.belongsTo(models.user, { foreignKey: "userId", as: "users" });
+      this.belongsTo(models.user, { foreignKey: "userId", as: "users",});
      }
   }
   recette.init(
@@ -19,14 +19,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
        
       },
-      // userId: {
-      //   type: DataTypes.UUID,
-      //   defaultValue: DataTypes.UUIDV4,
-      //   references: {
-      //     model: "users",
-      //     key: "id",
-      //   },
-      // },
+       userId: {
+       type: DataTypes.UUID,
+       defaultValue: DataTypes.UUIDV4,
+        references: {
+         model: "users",
+          key: "id",
+       },
+      },
       ingredients: {
         type: DataTypes.TEXT,
         allowNull: false,

@@ -7,6 +7,7 @@ const recette = require('./recette')
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     static associate(models) {
+      this.hasMany(models.recette, { foreignKey: "userId", as: "recettes",});
 //       const message = sequelize.define("message", { });
 //       const astuce = sequelize.define("astuce", { });
 //       const recette = sequelize.define("recette", { })

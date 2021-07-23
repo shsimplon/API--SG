@@ -29,13 +29,13 @@ module.exports = {
       video: {
         type: Sequelize.TEXT
       },
-      // userId: {
-      //   type: Sequelize.UUID,
-      //   references: {
-      //     model: "users",
-      //     key: "id",
-      //   },
-      // },
+       userId: {
+        type: Sequelize.UUID,
+       references: {
+          model: "users",
+         key: "id",
+       },
+       },
       likes: {
         type: Sequelize.INTEGER
       },

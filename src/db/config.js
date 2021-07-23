@@ -1,9 +1,9 @@
 module.exports = {
   "development": {
-    //  "username":"root",
-    //  "password":"1985Athelete",
-      "username": process.env.DB_USERNAME,
-     "password": process.env.DB_PASSWORD,
+     "username":"root",
+     "password":"1985Athelete",
+    //   "username": process.env.DB_USERNAME,
+    //  "password": process.env.DB_PASSWORD,
     "database": "api-sans-Gluten",
     "host": "127.0.0.1",
      "JWT_SECRET" :process.env.JWT_SECRET,

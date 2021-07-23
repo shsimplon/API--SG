@@ -8,29 +8,25 @@ const recettesController = {
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
-        // include: [
-        //     {
-        //        model: user, as: "users" 
-        //     }
-        //   ],
+      
         order: [["name", "ASC"]],
       });
       return { listRecettes };
     },
-    getOneRecette: async (name) => {
+    getOneRecette: async (machin) => {
         const Recette = await recette.findOne({
           where: {
            
-            name,
+            userId :machin,
           },
         attributes: { exclude: ["createdAt", "updatedAt"] },
-      includes: [
-          {
-           model: user, as:'users',
-         },
+      // includes: [
+      //     {
+      //      model: user, as:'users',
+      //    },
          
-         ],         
-         attributes: ["id", "name"],
+      //    ],         
+         attributes: ["id", "name","userId"],
         });
         if (!Recette) {
           throw new NotFoundError("Ressource introuvable", "Cette recette n'existe pas");
@@ -45,7 +41,7 @@ const recettesController = {
           where: {
            name, ingredients,preparations
           },
-          attributes: {exclude: ['userId']}
+          
         });
     
         if (Recette) {
