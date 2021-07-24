@@ -4,6 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   class recette extends Model {
     static associate(models) {
       this.belongsTo(models.user, { foreignKey: "userId", as: "users",});
+
+      
      }
   }
   recette.init(
