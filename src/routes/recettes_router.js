@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { OK, CREATED } = require("../helpers/status_codes");
-const { getAllRecettes,getOneRecette ,addRecette,updaterecette,deleteOne} = require("../controllers/recettes_controller");
+const { getAllRecettes,getOneRecette ,getuserRecette,addRecette,updaterecette,deleteOne} = require("../controllers/recettes_controller");
 const { djValidation } = require("../validators");
 const { ValidationError } = require("../helpers/errors");
 const recettesController = require("../controllers/recettes_controller");
@@ -25,7 +25,7 @@ const recette=request
 
   console.log(recette.userId)
  
- const resultat = await getOneRecette(recette.userId);
+ const resultat = await getuserRecette(recette.userId);
  
      response.status(OK).json(resultat);
   });

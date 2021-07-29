@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import Cookies from 'universal-cookie' ;
+import { withRouter } from 'react-router';
 const cookies=new Cookies();
 
-const SignIn = () => {
+const SignIn = (props) => {
     const [email, setemail]=useState('');
     const [password, setPassword]=useState('');
 
@@ -27,10 +28,12 @@ axios({
       emailError.innerHTML = res.data.errors.email;
       passwordError.innerHTML = res.data.errors.password;
     } else {
-      //apparaittre le cookie
-      cookies.set ('jwt', res.data.token, {path:'/'})
-      window.location = "/rajouter-recette";
-      // window.location = "/";
+     localStorage.setItem('jwt', res.data.token);
+      localStorage.setItem('userId', res.data.user.id);
+           console.log(res.data)
+    // window.location = "/";
+     props.history.push('/');
+
 
     }
   })
@@ -67,4 +70,4 @@ axios({
     );
 };
 
-export default SignIn;
+export default withRouter ( SignIn);

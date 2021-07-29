@@ -1,12 +1,16 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import React, { useContext } from 'react';
 import { NavLink } from "react-router-dom";
-import { UidContext } from './AppContext';
+import Auth from '../context/Auth';
+// import { UidContext } from './AppContext';
 import Logout from './Log/Logout';
  
 
 const Navbar = () => {
-    //UID PERMET UN AFFICHAGE CONDITIONNEL
-    const uid =useContext(UidContext);
+     const {isAuthenticated} =useContext(Auth);
+  
+  
   return (
     <nav>
         
@@ -19,8 +23,8 @@ const Navbar = () => {
             </div>
           </NavLink>
           </div>
-          {uid ? 
-(
+          {isAuthenticated ? ( 
+
     <ul>
             <li></li>
             <li className="welcome">
@@ -29,10 +33,14 @@ const Navbar = () => {
                     {/* {userData.pseudo} */}
                     </h5>
               </NavLink>
+              <NavLink  to="/account">
+                  Mon compte
+                </NavLink>
+
             </li>
             <Logout/> 
           </ul>
-        ) : (
+       ) : (
           <ul>
             <li></li>
             <li>
@@ -42,8 +50,8 @@ const Navbar = () => {
 
         </li>
     </ul>
-
-)}
+      )
+      }
 
 </div>
         </nav>

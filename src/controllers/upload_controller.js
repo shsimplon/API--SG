@@ -1,13 +1,13 @@
-// const restaurant = require("../models/restaurant");
+// const recette = require("../models/recette");
 // //incrementer les elments dans les fichies
 // const fs = require("fs");
 // const { promisify } = require("util");
 // const pipeline = promisify(require("stream").pipeline);
 // const { uploadErrors } = require("../utils/errors_utils")
-// module.exports.uploadetablissement = async (req, res) => {
+// module.exports.uploadRecette = async (req, res) => {
 //   try {
 //     if (
-//       req.file.detectedMimeType != "image/jpg" &&
+//       req.file.c != "image/jpg" &&
 //       req.file.detectedMimeType != "image/png" &&
 //       req.file.detectedMimeType != "image/jpeg"
 //     )
@@ -28,9 +28,9 @@
 //     )
 //   );
 //   try {
-//     await restaurant.findByIdAndUpdate(
+//     await recette.findByIdAndUpdate(
 //       req.body.userId,
-//       { $set : {file: "./uploads/restaurant/" + fileName}},
+//       { $set : {file: "./uploads/recette/" + fileName}},
 //       { new: true, upsert: true, setDefaultsOnInsert: true},
 //       (err, docs) => {
 //         if (!err) return res.send(docs);

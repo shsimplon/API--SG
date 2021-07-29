@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios'
 import cookie from "js-cookie"
+import {withRouter} from 'react-router-dom';
 
-const Logout = () => {
+
+const Logout = (props) => {
     const removeCookie = (key) => {
       // petite sécurité
         if (window !== "undefined") {
@@ -17,10 +19,12 @@ await axios({
     withCredentials: true,
 
 })
-.then (()=> removeCookie('jwt'))
+  .then (()=> localStorage.removeItem('jwt'))
+
+ // .then (()=> removeCookie('jwt'))
 .catch ((err)=> console.log(err))
 
-window.location="/";
+props.history.push('/');
 
     }
     return (
@@ -30,13 +34,14 @@ window.location="/";
     );
 };
 
-export default Logout;
+export default withRouter (Logout);
 
-// const removeCookie = (key) => {
-//     if (window !== "undefined") {
+//  const removeCookie = (key) => {
+//      if (window !== "undefined") {
 //       cookie.remove(key, { expires: 1 });
-//     }
-//   };    on mit en paramettre le jwt (key) quon veut supprimé 
+//  }
+//  };   
+ // on mit en paramettre le jwt (key) quon veut supprimé 
 // puis une condition à mettre pour la sécurité : ctd si ya rien dans le window supprime le cookie
 
  //le cookie est retirer en front et on bach avec le package js-cookie car défois reste malgré sa suppréssion en backend

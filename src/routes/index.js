@@ -5,6 +5,7 @@ const restaurantsRouter= require("./restaurants_router");
 const patisseriesRouter=require("./patisseries_router")
 const recettesRouter=require("./recettes_router")
 const userRouter = require ('./users_router.js')
+const likeRouter=require('./likes_router')
 //  const uploadController = require ("./upload_router")
 
 const mainRouter = express.Router();
@@ -16,8 +17,10 @@ mainRouter.use("/recettes",recettesRouter);
 mainRouter.use('/users',userRouter);
 //unpload
 
-//  mainRouter.use('/etablissements',uploadController);
+//  mainRouter.use('/uploadRecette',uploadController);
 
+ // Likes
+ mainRouter.use('/likes',likeRouter);
 
 
 module.exports = mainRouter;

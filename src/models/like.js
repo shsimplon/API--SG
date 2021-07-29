@@ -3,28 +3,24 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class like extends Model {
     static associate(models) {
+      
       models.user.belongsToMany(models.recette, {
-        through: models.like,
-        foreignKey: "userId",
-        otherKey: "recetteId",
-        // as: 'users',
-      });
-
-      models.recette.belongsToMany(models.user, {
-        through: models.like,
-        foreignKey: "recetteId",
-        otherKey: "userId",
-        // as: 'recettes',
-      });
-
-      models.like.belongsTo(models.user, {
+        through: "likes",
         foreignKey: "userId",
         as: "users",
       });
-
-      models.like.belongsTo(models.recette, {
+      models.recette.belongsToMany(models.user, {
+        through: "likes",
         foreignKey: "recetteId",
         as: "recettes",
+      });
+
+     this.belongsTo(models.user, {
+        foreignKey: "userId",
+      });
+
+     this.belongsTo(models.recette, {
+        foreignKey: "recetteId",
       });
     }
   }
