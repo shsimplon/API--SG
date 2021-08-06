@@ -1,54 +1,61 @@
-import React, { useState } from 'react';
-import axios from 'axios'
-import Cookies from 'universal-cookie' ;
-import { withRouter } from 'react-router';
-const cookies=new Cookies();
+import React, { useState } from "react";
+import axios from "axios";
+import Cookies from "universal-cookie";
+import { withRouter } from "react-router";
+const cookies = new Cookies();
 
 const SignIn = (props) => {
-    const [email, setemail]=useState('');
-    const [password, setPassword]=useState('');
+  const [email, setemail] = useState("");
+  const [password, setPassword] = useState("");
 
-const handleLogin=(e)=>{
+  const handleLogin = (e) => {
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
-
-e.preventDefault();
-axios({
-    method: "post",
-    url: `${process.env.REACT_APP_API_URL}api/users/login`,
-    
-    data: {
-      email,
-      password,
-    },
-})
-.then((res) => {
-    console.log(res);
-    if (res.data.errors) {
-      emailError.innerHTML = res.data.errors.email;
-      passwordError.innerHTML = res.data.errors.password;
-    } else {
-     localStorage.setItem('jwt', res.data.token);
-      localStorage.setItem('userId', res.data.user.id);
-           console.log(res.data)
-    // window.location = "/";
-     props.history.push('/');
-
-
+    if (!password || !email) {
+      if (password === null || password === "") {
+        passwordError.innerHTML = "password est  obligataoire";
+      }
+      if (email === null || email === "") {
+        emailError.innerHTML = " email est obligatoire";
+      }
     }
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-};
+    e.preventDefault();
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/users/login`,
 
-    return (
-       
+      data: {
+        email,
+        password,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.errors) {
+          emailError.innerHTML = res.data.errors.email;
+          passwordError.innerHTML = res.data.errors.password;
+        } else {
+          localStorage.setItem("jwt", res.data.token);
+          localStorage.setItem("userId", res.data.user.id);
+          console.log(res.data);
+          // window.location = "/";
+          props.history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  return (
     <form action="" onSubmit={handleLogin} id="sign-up-form">
-         <label htmlFor="email">Email</label>
+      <label htmlFor="email">Email</label>
       <br />
 
-      <input type="text" name="email" id="email"
+      <input
+        type="text"
+        name="email"
+        id="email"
         onChange={(e) => setemail(e.target.value)}
         value={email}
       />
@@ -57,7 +64,10 @@ axios({
       <br />
       <label htmlFor="password">Mot de passe</label>
       <br />
-      <input type="password" name="password" id="password"
+      <input
+        type="password"
+        name="password"
+        id="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
       />
@@ -65,9 +75,8 @@ axios({
       <br />
 
       <input type="submit" value="Se connecter" />
-
     </form>
-    );
+  );
 };
 
-export default withRouter ( SignIn);
+export default withRouter(SignIn);

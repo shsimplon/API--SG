@@ -35,7 +35,7 @@ const SignUp = () => {
           "Les mots de passe ne correspondent pas ";
       }
       if (password === null || password === "") {
-        passwordError.innerHTML = "password is required";
+        passwordError.innerHTML = "password est  obligatoire";
       }
 
       if (!terms.checked)
