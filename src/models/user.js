@@ -1,15 +1,15 @@
 "use strict";
 const { Model } = require("sequelize");
 
-const recette = require('./recette')
-
+const recette = require("./recette");
 
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     static associate(models) {
-      this.hasMany(models.recette, { 
-        foreignKey: "userId", as: "recettes"});
-
+      this.hasMany(models.recette, {
+        foreignKey: "userId",
+        as: "recettes",
+      });
     }
   }
   user.init(
@@ -24,22 +24,13 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        // unique: true,
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        // unique: true,
-    //     validate:{
-    //       isEmail: {
-    //         args: true,
-    //         msg: 'The email you entered is invalid or is already in our system.'
-    //     },
-    //     max: {
-    //         args: 254,
-    //         msg: 'The email you entered is invalid or longer than 254 characters.'
-    //     }  
-    // }
+        // validate: {
+        //   isEmail: true,
+        // },
       },
 
       password: {
@@ -60,14 +51,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.DATE,
       },
-     
     },
-    
+
     {
       sequelize,
       modelName: "user",
     }
-    
   );
   return user;
 };

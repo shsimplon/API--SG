@@ -1,22 +1,25 @@
 const { user } = require("../models");
-const { NotFoundError, BadRequestError ,UnauthorizedError} = require ("../helpers/errors");
+const {
+  NotFoundError,
+  BadRequestError,
+  UnauthorizedError,
+} = require("../helpers/errors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 async function getEncryptedPassword(password) {
+  let error, encryptedPassword;
 
-  let error,encryptedPassword
+  encryptedPassword = await bcrypt.hash(password, 10);
 
-  encryptedPassword =await bcrypt.hash(password,10)
-
-    return encryptedPassword;
+  return encryptedPassword;
 }
 
 const userController = {
   getAll: async () => {
     const users = await user.findAll({
       order: [["username", "ASC"]],
-      attributes: {exclude: ["dateCreated"]},
+      attributes: { exclude: ["dateCreated"] },
       raw: true,
     });
     return users;
@@ -25,10 +28,9 @@ const userController = {
   getOne: async (id) => {
     const User = await user.findOne({
       where: {
-        id
+        id,
       },
-      attributes: {exclude: ["dateCreated"]},
-
+      attributes: { exclude: ["dateCreated"] },
     });
     if (!User) {
       throw new NotFoundError("Ressource introuvable", "Ce User n'existe pas");
@@ -37,47 +39,42 @@ const userController = {
     return User;
   },
 
-   getByUserName: async (email,password) => {
+  getByUserName: async (email, password) => {
     const User = await user.findOne({
       where: {
-        email
+        email,
       },
-      attributes: {exclude: ["dateCreated"]},
-
+      attributes: { exclude: ["dateCreated"] },
     });
     if (!User) {
       throw new NotFoundError("Ressource introuvable", "Ce User n'existe pas");
     }
 
-    let correct =await bcrypt.compare(password, User.password);
-        if(correct){
-
-        const MAXAGE = Math.floor(Date.now() / 1000) + (60 * 60); // 1 hour of expiration
-        User.exp=MAXAGE;
-        token= await jwt.sign(JSON.stringify(User), process.env.JWT_SECRET);
-        User.token=token;
-          return User;
-
-        }
-        else{
-          throw new UnauthorizedError("Wrong Password");
-        }
-
+    let correct = await bcrypt.compare(password, User.password);
+    if (correct) {
+      const MAXAGE = Math.floor(Date.now() / 1000) + 60 * 60; // 1 hour of expiration
+      User.exp = MAXAGE;
+      token = await jwt.sign(JSON.stringify(User), process.env.JWT_SECRET);
+      User.token = token;
+      return User;
+    } else {
+      throw new UnauthorizedError("Wrong Password");
+    }
   },
 
   add: async (data) => {
-    const {email,password} = data;
+    const { email, password } = data;
 
     const User = await user.findOne({
       where: {
-         email
-      }
+        email,
+      },
     });
 
     if (User) {
       throw new BadRequestError("Ressource existante", "Ce User existe déjà");
     }
-    data.password=await getEncryptedPassword(password);
+    data.password = await getEncryptedPassword(password);
 
     console.log(data.password);
     const newUser = await user.create(data);
@@ -97,9 +94,9 @@ const userController = {
 
     const User = await user.findOne({
       where: {
-        id
+        id,
       },
-      attributes: {exclude: ["dateCreated"]},
+      attributes: { exclude: ["dateCreated"] },
     });
 
     return User;
@@ -117,7 +114,6 @@ const userController = {
       where: { id },
     });
   },
-
 };
 
 module.exports = userController;
@@ -156,7 +152,6 @@ module.exports = userController;
 //       return res.status(400).json({ 'error': 'password invalid (must length 4 - 8 and include 1 number at least)' });
 //     }
 
-  
 //     models.user
 //       .findOne({
 //         attributes: ["email"],
@@ -188,7 +183,7 @@ module.exports = userController;
 //   },
 
 //   login: function(req, res) {
-    
+
 //     // Params
 //     var email    = req.body.email;
 //     var password = req.body.password;
@@ -197,18 +192,16 @@ module.exports = userController;
 //       return res.status(400).json({ 'error': 'missing parameters' });
 //     }
 
-    
 //         models.user.findOne({
 //           where: { email: email }
 //         })
 //         .then(function(userFound) {
-         
-    
+
 //         if (userFound) {
 //           bcrypt.compare(password, userFound.password, function(errBycrypt, resBycrypt) {
-      
+
 //         if(resBycrypt) {
-  
+
 //         return res.status(200).json({
 //           'userId': userFound.id,
 //           'token': isAuth.generateTokenForUser(userFound)
@@ -221,7 +214,7 @@ module.exports = userController;
 //           return res.status(404).json({ 'error': 'user not exist in DB' });
 //     }
 //     })
-  
+
 //   .catch(function(err) {
 //     return res.status(500).json({ 'error': 'unable to verify user' });
 //   });

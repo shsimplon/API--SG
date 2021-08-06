@@ -1,7 +1,10 @@
 const { recette, user } = require("../models");
+// const fs = require("fs");
 
+// const { promisify } = require("util");
+// const pipeline = promisify(require("stream").pipeline);
 const { BadRequestError, NotFoundError } = require("../helpers/errors");
-
+const { uploadErrors } = require("../utils/errors.utils");
 const recettesController = {
   getAllRecettes: async () => {
     const listRecettes = await recette.findAll({
@@ -44,13 +47,31 @@ const recettesController = {
 
     return Recette;
   },
-  addRecette: async (data) => {
-    const { name, ingredients, preparations } = data;
+  // addRecette: async (data, request) => {
+  //   const { name, ingredients, preparations, image } = data;
 
+  //   const Recette = await recette.findOne({
+  //     where: {
+  //       name,
+  //     },
+  //   });
+
+  //   if (Recette) {
+  //     throw new BadRequestError(
+  //       "Ressource existante",
+  //       "La Recette existe déjà"
+  //     );
+  //   }
+
+  //   const newRecette = await recette.create(data);
+
+  //   return newRecette;
+  // },
+  addRecette: async (data, req, res) => {
+    const { name, ingredients, preparations, image } = data;
     const Recette = await recette.findOne({
       where: {
-        name
-       
+        name,
       },
     });
 
@@ -61,23 +82,11 @@ const recettesController = {
       );
     }
 
-    // a tester avec la table user
-    // const user = await user.findOne({
-    //   where: {
-    //     id: userId,
-    //   },
-    // });
-    // if (!user) {
-    //   throw new NotFoundError("Le user n'existe pas");
-    // }
-
     const newRecette = await recette.create(data);
-
-    // if (userId)
-    // newRecette.addusers(userId);
 
     return newRecette;
   },
+
   updaterecette: async (id, data) => {
     const Recette = await recette.findOne({
       where: { id },

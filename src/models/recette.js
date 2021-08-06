@@ -3,10 +3,8 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class recette extends Model {
     static associate(models) {
-      this.belongsTo(models.user, { foreignKey: "userId", as: "users",});
-
-      
-     }
+      this.belongsTo(models.user, { foreignKey: "userId", as: "users" });
+    }
   }
   recette.init(
     {
@@ -19,15 +17,14 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-       
       },
-       userId: {
-       type: DataTypes.UUID,
-       defaultValue: DataTypes.UUIDV4,
+      userId: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         references: {
-         model: "users",
+          model: "users",
           key: "id",
-       },
+        },
       },
       ingredients: {
         type: DataTypes.TEXT,
@@ -37,31 +34,31 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      
+
       image: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         // defaultValue: "./uploads/etablissements/random-.png"
       },
       video: {
         type: DataTypes.TEXT,
       },
-     
+
       likes: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
       },
     },
     {
       sequelize,
       modelName: "recette",
-    },
+    }
   );
   return recette;
 };

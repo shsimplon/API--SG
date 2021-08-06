@@ -19,14 +19,33 @@ const SignUp = () => {
       ".password-confirm.error"
     );
     const termsError = document.querySelector(".terms.error");
-
-    if (password !== controlPassword || !terms.checked) {
-      if (password !== controlPassword)
+    var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    if (!passw.test(password)) {
+      passwordError.innerHTML =
+        "Le mot de passe doit comporter  6 à 20 caractères contenant au moins un chiffre , une majuscule et une lettre minuscule";
+    } else if (
+      !password ||
+      password !== controlPassword ||
+      !terms.checked ||
+      !email ||
+      !username
+    ) {
+      if (password !== controlPassword) {
         passwordConfirmError.innerHTML =
-          "Les mots de passe ne correspondent pas";
+          "Les mots de passe ne correspondent pas ";
+      }
+      if (password === null || password === "") {
+        passwordError.innerHTML = "password is required";
+      }
 
       if (!terms.checked)
         termsError.innerHTML = "Veuillez valider les conditions générales";
+      if (username === null || username === "") {
+        usernameError.innerHTML = "username est obligatoire";
+      }
+      if (email === null || email === "") {
+        emailError.innerHTML = " email est obligatoire";
+      }
     } else {
       await axios({
         method: "post",
@@ -52,74 +71,72 @@ const SignUp = () => {
   };
 
   return (
-
     <>
-    {formSubmit ? (
-      <>
-        <SignIn />
-        <span></span>
-        <h4 className="success">
-          Enregistrement réussi, veuillez-vous connecter
-        </h4>
-      </>
-    ) : (
-
-      <form action="" onSubmit={handleRegister} id="sign-up-form">
-        <label htmlFor="username">username</label>
-        <br />
-        <input
-          type="text"
-          name="username"
-          id="username"
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-        />
-        <div className="username error"></div>
-        <br />
-        <label htmlFor="email">Email</label>
-        <br />
-        <input
-          type="text"
-          name="email"
-          id="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <div className="email error"></div>
-        <br />
-        <label htmlFor="password">Mot de passe</label>
-        <br />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-        <div className="password error"></div>
-        <br />
-        <label htmlFor="password-conf">Confirmer mot de passe</label>
-        <br />
-        <input
-          type="password"
-          name="password"
-          id="password-conf"
-          onChange={(e) => setControlPassword(e.target.value)}
-          value={controlPassword}
-        />
-        <div className="password-confirm error"></div>
-        <br />
-        <input type="checkbox" id="terms" />
-        <label htmlFor="terms">
-          J'accepte les{" "}
-          <a href="/" target="_blank" rel="noopener noreferrer">
-            conditions générales
-          </a>
-        </label>
-        <div className="terms error"></div>
-        <br />
-        <input type="submit" value="Valider inscription" />
-      </form>
+      {formSubmit ? (
+        <>
+          <SignIn />
+          <span></span>
+          <h4 className="success">
+            Enregistrement réussi, veuillez-vous connecter
+          </h4>
+        </>
+      ) : (
+        <form action="" onSubmit={handleRegister} id="sign-up-form">
+          <label htmlFor="username">username</label>
+          <br />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          />
+          <div className="username error"></div>
+          <br />
+          <label htmlFor="email">Email</label>
+          <br />
+          <input
+            type="text"
+            name="email"
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+          <div className="email error"></div>
+          <br />
+          <label htmlFor="password">Mot de passe</label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+          <div className="password error"></div>
+          <br />
+          <label htmlFor="password-conf">Confirmer mot de passe</label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            id="password-conf"
+            onChange={(e) => setControlPassword(e.target.value)}
+            value={controlPassword}
+          />
+          <div className="password-confirm error"></div>
+          <br />
+          <input type="checkbox" id="terms" />
+          <label htmlFor="terms">
+            J'accepte les{" "}
+            <a href="/" target="_blank" rel="noopener noreferrer">
+              conditions générales
+            </a>
+          </label>
+          <div className="terms error"></div>
+          <br />
+          <input type="submit" value="Valider inscription" />
+        </form>
       )}
     </>
   );

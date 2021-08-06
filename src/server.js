@@ -1,12 +1,15 @@
 //import express
 const express = require("express");
 const fileUpload = require("express-fileupload");
+const bodyParser = require("body-parser");
+// const path = require("path");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cookies = require("cookie-parser");
 const { isAuth, requireAuth } = require("./middlewares/auth.middleware");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
+// var fs = require('fs');
 
 const routes = require("./routes");
 //middeleware
@@ -15,18 +18,8 @@ const routes = require("./routes");
 const { notFoundHandler, errorLogger, errorHandler } = require("./middlewares");
 //instantiate server
 const server = express();
-//filtrer ceux qui peuvent faire les req sur le site
-// const corsOptions = {
-//   origin: process.env.CLIENT_URL,
-//   credentials: true,
-//   allowedHeaders: ["sessionId", "Content-Type"],
-//   exposedHeaders: ["sessionId"],
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   preflightContinue: false,
-// };
-//  server.use(cors(corsOptions));
 server.use(cors());
-
+// Enable file upload using express-fileupload
 server.use(
   fileUpload({
     createParentPath: true,
@@ -43,6 +36,7 @@ server.use(cookies());
 
 // Static Files
 server.use(express.static("public"));
+// server.use(fileUpload());
 
 //configure routes
 server.get("/", function (req, res) {

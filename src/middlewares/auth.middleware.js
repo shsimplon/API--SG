@@ -1,4 +1,3 @@
-
 // const jwt = require("jsonwebtoken");
 // const user = require("../models/user");
 // const {UnauthorizedError}=require ("../helpers/errors")
@@ -7,30 +6,28 @@
 // const isAuth = (request, response, next) => {
 
 //     const token = request.headers.jwt;
-    
+
 //     jwt.verify(token,process.env.JWT_SECRET, (error, user) => {
 //         if (error) {
 //             console.log(error);
 //               throw new UnauthorizedError("You must be login");
 //        } else {
 //              const {  exp } = user;
-         
+
 //              if (Date.now() / 1000 >= exp) {
 //                 response.clearCookie("jwt");
-                
+
 //                 throw new UnauthorizedError("You must be login");
 //              }
 //              request.user =user;
 //              next();
 //         }
 //     });
-   
+
 // }
 // module.exports = isAuth;
 
 // // Imports
-
-
 
 // // Exported functions
 // // module.exports = {
@@ -60,10 +57,7 @@
 // // }
 // // }
 
-
-
-
-// // require authentification: correspondance à la base de données 
+// // require authentification: correspondance à la base de données
 // module.exports.requireAuth = (request, response, next) => {
 //   const token = request.headers.jwt;
 //   if (token) {
@@ -84,36 +78,33 @@
 
 const jwt = require("jsonwebtoken");
 const user = require("../models/user");
-const {UnauthorizedError}=require ("../helpers/errors")
+const { UnauthorizedError } = require("../helpers/errors");
 
 // verification de token
 const isAuth = (request, response, next) => {
-      //  const token = request.cookies.jwt;
-       const token = request.headers.authorization.split('Bearer ')[1];
-console.log(token)
-    jwt.verify(token,process.env.JWT_SECRET, (error, user) => {
-        if (error) {
-            console.log(error);
-              throw new UnauthorizedError("You must be login");
-       } else {
-             const {  exp } = user;
-         
-             if (Date.now() / 1000 >= exp) {
-                response.clearCookie("jwt");
-                
-                throw new UnauthorizedError("You must be login");
-             }
-             request.user =user;
-             next();
-        }
-    });
-   
-}
+  // const token = request.cookies.jwt;
+  const token = request.headers.authorization.split("Bearer ")[1];
+  console.log(token);
+  jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
+    if (error) {
+      console.log(error);
+      throw new UnauthorizedError("You must be login");
+    } else {
+      const { exp } = user;
+
+      if (Date.now() / 1000 >= exp) {
+        response.clearCookie("jwt");
+
+        throw new UnauthorizedError("You must be login");
+      }
+      request.user = user;
+      next();
+    }
+  });
+};
 module.exports = isAuth;
 
 // Imports
-
-
 
 // Exported functions
 // module.exports = {
@@ -143,24 +134,21 @@ module.exports = isAuth;
 // }
 // }
 
-
-
-
-// require authentification: correspondance à la base de données 
+// require authentification: correspondance à la base de données
 module.exports.requireAuth = (request, response, next) => {
   const token = request.cookies.jwt;
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
       if (err) {
         console.log(err);
-        response.send(200).json('no token')
+        response.send(200).json("no token");
       } else {
         console.log(user.id);
-        response.user =user;
+        response.user = user;
         next();
       }
     });
   } else {
-    console.log('No token');
+    console.log("No token");
   }
-}
+};

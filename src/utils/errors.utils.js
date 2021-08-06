@@ -1,45 +1,48 @@
+// module.exports.signUpErrors = (values) => {
+//   let errors = {};
 
+//   if (!values.username === "" || values.username == null) {
+//     errors.username = "Username required";
+//   }
+//   if (!values.email) {
+//     errors.email = "Email required";
+//   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+//     errors.email = "Email address is invalid";
+//   }
+//   //   if (!values.password) {
+//   //     errors.password = "Password is required";
+//   //   } else if (values.password.length < 6) {
+//   //     errors.password = "Password needs to be 6 characters or more";
+//   //   }
 
-module.exports.signUpErrors = (err) => {
-  let errors = { username: "", email: "", password: "" };
+//   //   if (!values.password2) {
+//   //     errors.password2 = "Password is required";
+//   //   } else if (values.password2 !== values.password) {
+//   //     errors.password2 = "Passwords do not match";
+//   //   }
 
-  if (err.message.includes("username"))
-    errors.username = "username incorrect ou déjà pris";
+//   return errors;
+// };
 
-  if (err.message.includes("email")) errors.email = "Email incorrect ou pas d'email";
+// module.exports.signInErrors = (err) => {
+//   let errors = { email: "", password: "" };
 
-  if (err.message.includes("password"))
-    errors.password = "Le mot de passe doit faire 6 caractères minimum";
+//   if (err.message.includes("email")) errors.email = "Email incorrect";
 
-  if (err.code === 11000 && Object.keys(err.keyValue)[0].includes("username"))
-    errors.username = "Ce username est déjà pris";
+//   if (err.message.includes("password"))
+//     errors.password = "Le mot de passe ne correspond pas";
 
-  if (err.code === 11000 && Object.keys(err.keyValue)[0].includes("email"))
-    errors.email = "Cet email est déjà enregistré";
+//   return errors;
+// };
 
-  return errors;
-};
+// module.exports.uploadErrors = (err) => {
+//   let errors = { format: "", maxSize: "" };
 
-module.exports.signInErrors = (err) => {
-  let errors = { email: '', password: ''}
+//   if (err.message.includes("invalid file"))
+//     errors.format = "Format incompatabile";
 
-  if (err.message.includes("email")) errors.email = "Email incorrect";
+//   if (err.message.includes("max size"))
+//     errors.maxSize = "Le fichier dépasse 500ko";
 
-  
-  if (err.message.includes('password'))
-    errors.password = "Le mot de passe ne correspond pas"
-
-  return errors;
-}
-
-module.exports.uploadErrors = (err) => {
-  let errors = { format: '', maxSize: ""};
-
-  if (err.message.includes('invalid file'))
-    errors.format = "Format incompatabile";
-
-  if (err.message.includes('max size'))
-    errors.maxSize = "Le fichier dépasse 500ko";
-
-  return errors
-}
+//   return errors;
+// };

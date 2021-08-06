@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import RecetteDetails from "./RecetteDetails"
+import RecetteDetails from "./RecetteDetails";
+import UploadRecette from "./UploadRecette";
+
 const RajouterRecette = () => {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("jwt");
@@ -10,30 +12,25 @@ const RajouterRecette = () => {
       Authorization: "Bearer " + token,
     },
   };
- 
+
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}api/recettes/userRecette/`,config)
-      .then((res) => setData(res.data)
-      );
+      .get(`${process.env.REACT_APP_API_URL}api/recettes/userRecette/`, config)
+      .then((res) => setData(res.data));
+  }, []);
+  console.log(data);
 
-
-  },
-  []);
-  console.log(data)
-
-
-  
   return (
-    <div className="profil-page">
-      <ul >
-      {data.map((recette) => (
-      
-      < RecetteDetails recette={recette} key={recette.name} />
-
-        ))}
-         </ul>
-    </div>
+    <>
+      <div className="profil-page">
+        <UploadRecette />
+        <ul>
+          {data.map((recette) => (
+            <RecetteDetails recette={recette} key={recette.name} />
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

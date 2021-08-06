@@ -5,6 +5,6 @@
 // const router = express.Router();
 
 
-// router.post('/upload',upload.single('file'),uploadController.uploadRecette);
+// router.post('/',upload.single('file'),uploadController.uploadProfil);
 
 // module.exports = router;
