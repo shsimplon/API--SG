@@ -50,6 +50,8 @@ server.get("/jwtid", requireAuth, (request, response) => {
 
 server.use("/api", routes);
 
+// server.use(helmet.xssFilter());
+
 server.use("*", notFoundHandler);
 server.use(errorLogger);
 server.use(errorHandler);

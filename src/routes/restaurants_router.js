@@ -18,8 +18,6 @@ router.get("/:name", async (request, response) => {
 });
 
 router.post("/", async (request, response) => {
-
-
   // if (request.files !== null) {
   //   try {
   //     if (
@@ -35,26 +33,21 @@ router.post("/", async (request, response) => {
   //     return response.status(201).json({ errors });
   //   }
 
-  
-    if(!request.files) {
-        response.send({
-            status: false,
-            message: 'No file uploaded'
-        });
-        
-    } else {
-  let avatar = request.files.avatar;
-  // const buffer = new Buffer.from(avatar.data)
-  const img = avatar.data;
-  const data = img.toString('base64');
-  request.body.image = data;
-await avatar.mv('./public/uploads/' + avatar.name);
-  // }
-  const newRestaurant = await addRestaurant(request.body);
-  response.status(CREATED).json(newRestaurant);
-     }
+  if (!request.files) {
+    response.send({
+      status: false,
+      message: "No file uploaded",
+    });
+  } else {
+    let avatar = request.files.avatar;
+    const img = avatar.data;
+    const data = img.toString("base64");
+    request.body.image = data;
+    await avatar.mv("./public/uploads/" + avatar.name);
 
+    const newRestaurant = await addRestaurant(request.body);
+    response.status(CREATED).json(newRestaurant);
+  }
 });
 
 module.exports = router;
-

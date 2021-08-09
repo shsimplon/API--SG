@@ -46,7 +46,7 @@ router.put("/:id", isAuth, async (request, response) => {
   const user = request.body;
 
   const userUpdated = await update(request.params.id, user, request.user.id);
-  response.status(OK).json(quizUpdated);
+  response.status(OK).json(userUpdated);
 });
 
 router.delete("/:id", isAuth, async (request, response) => {
