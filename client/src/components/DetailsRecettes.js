@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 // import image from "../assets/img/doowap.png"; // with import
 
-const RecetteDetails = (props) => {
+const DetailsRecettes = (props) => {
   const { recette } = props;
 
   return (
@@ -35,4 +34,4 @@ const RecetteDetails = (props) => {
   );
 };
 
-export default RecetteDetails;
+export default DetailsRecettes;

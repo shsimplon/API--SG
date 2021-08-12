@@ -2,9 +2,7 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class restaurant extends Model {
-    static associate(models) {
-      
-    }
+    static associate(models) {}
   }
   restaurant.init(
     {
@@ -17,25 +15,22 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-     
       },
-     
+
       place: {
         type: DataTypes.STRING,
         allowNull: false,
-      
       },
       image: {
-          type: DataTypes.TEXT,
-        //  defaultValue: "./uploads/restaurant/random-.png"
-    
-        //  allowNull: false,
+        type: DataTypes.TEXT,
+      },
+      lien: {
+        type: DataTypes.TEXT,
       },
       description: {
         type: DataTypes.TEXT,
-        
-       allowNull: false,
-      
+
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -49,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "restaurant",
-    },
+    }
   );
   return restaurant;
 };

@@ -1,190 +1,197 @@
+/* eslint-disable no-dupe-keys */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
-// import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-// const UploadRecette = () => {
-//   const [data, setData] = useState([]);
-//   const [file, setFile] = useState();
-//   const [name, setName] = useState();
-//   const [ingredients, setIngredients] = useState();
-//   const [preparations, setPreparations] = useState();
+const UploadRecette = () => {
+  const [data, setData] = useState([]);
+  const [file, setFile] = useState(null);
+  const [name, setName] = useState();
+  const [ingredients, setIngredients] = useState();
+  const [preparations, setPreparations] = useState();
 
-//   const token = localStorage.getItem("jwt");
-//   const config = {
-//     headers: {
-//       Authorization: "Bearer " + token,
-//     },
+  const onSubmit = (event) => {
+    event.preventDefault();
+    console.log(file);
+    const token = localStorage.getItem("jwt");
+    const upload = new FormData();
+    upload.append("file", file);
+    console.log("ccccccccccc", upload);
+    const config = {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/recettes/upload`,
+      headers: { Authorization: "Bearer " + token },
+
+      data: {
+        name,
+        ingredients,
+        preparations,
+      },
+      upload,
+    }).then((res) => console.log(res));
+  };
+
+  return (
+    <div>
+      <form className="update-container">
+        <div className="update-recette">
+          <input
+            name="name"
+            type="text"
+            placeholder="Nom de la recette"
+            onChange={(event) => {
+              const { value } = event.target;
+              setName(value);
+            }}
+          />
+          <br />
+          <input
+            type="file"
+            id="file"
+            name="file"
+            onChange={(event) => {
+              const file = event.target.files[0];
+              setFile(file);
+            }}
+          />
+
+          <br />
+          <input
+            name="ingredients"
+            type="text"
+            placeholder="Nom de la recette"
+            onChange={(event) => {
+              const { value } = event.target;
+              setIngredients(value);
+            }}
+          />
+          <br />
+
+          <input
+            name="preparations"
+            type="text"
+            placeholder="Nom de la recette"
+            onChange={(event) => {
+              const { value } = event.target;
+              setPreparations(value);
+            }}
+          />
+          <br />
+          <button onClick={onSubmit} type="submit">
+            {" "}
+            + Ajouter recette
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default UploadRecette;
+// import React, { Component } from "react";
+
+// export default class UploadRecette extends Component {
+//   state = {
+//     name: "",
+//     ingedients: "",
+//     preparations: "",
+//     image: "",
+//     file: "",
 //   };
-//   const handlePicture = (e) => {
-//     e.preventDefault();
-//   };
-// handleChange = (event) => {
+
+//   async componentDidMount() {}
+
+//   handleChange = (event) => {
 //     const { name, value } = event.target;
-//     setState({ [name]: value });
+//     this.setState({ [name]: value });
 //   };
-//   useEffect(() => {
-//     axios
-//       .post(`${process.env.REACT_APP_API_URL}api/recettes`, config)
-//       .then((res) => setData(res.data));
-//   }, []);
-//   console.log(data);
+//   //   onInputChange = (e) => {
+//   //     this.setState(e.target.files);
+//   //   };
 
-//   return (
-//     <div>
-//       <ul className="update-container">
-//         <div className="update-recette">
-//           <li>
-//             {" "}
-//             <h3>Nom de la recette:</h3>
-//             <br />
-//             <textarea
-//               type="text"
-//               onChange={(e) => setName(e.target.value)}
-//             ></textarea>{" "}
-//           </li>
+//   handleSubmit = (event) => {
+//     event.preventDefault();
 
-//           <br />
-//           <li>
-//             {" "}
-//             <h3>Ingredients:</h3> <br />
-//             <textarea
-//               type="text"
-//               onChange={(e) => setIngredients(e.target.value)}
-//             ></textarea>
-//           </li>
-//           <br />
-//           <li>
-//             {" "}
-//             <h3>Preparations:</h3> <br />
-//             <textarea
-//               type="text"
-//               onChange={(e) => setPreparations(e.target.value)}
-//             ></textarea>
-//           </li>
-//         </div>
+//     const recette = { ...this.state };
 
-//         <div className="left-part">
-//           <img src="./img/icon.png" alt="icon" />
+//     try {
+//       const token = localStorage.getItem("jwt");
 
-//           <form action="" onSubmit={handlePicture} className="upload-pic">
-//             <label htmlFor="file">Tèlècharger une image</label>
+//       axios({
+//         method: "post",
+//         url: `${process.env.REACT_APP_API_URL}api/recettes/upload`,
+//         headers: { Authorization: "Bearer " + token },
+//         data: {
+//           name: recette.name,
+//           ingredients: recette.ingredients,
+//           preparations: recette.preparations,
+
+//           image: recette.uploadedFile,
+//         },
+//       }).then((res) => this.setState());
+//     } catch (e) {
+//       console.log(e);
+//     }
+
+//     //rest : vider le formulaire
+//     Object.keys(recette).forEach((item) => {
+//       recette[item] = "";
+//     });
+
+//     this.setState({ ...recette });
+//   };
+
+//   render() {
+//     return (
+//       <div>
+//         <form className="update-container" onSubmit={this.handleSubmit}>
+//           <div className="update-recette">
 //             <input
-//               type="uploadedFile"
-//               id="file"
-//               name="uploadedFile"
-//               accept=".jpg, .jpeg, .png"
-//               onChange={(e) => setFile(e.target.files[0])}
+//               value={this.state.name}
+//               onChange={this.handleChange}
+//               name="name"
+//               type="text"
+//               placeholder="Nom de la recette"
 //             />
 //             <br />
-//             <button type="submit" value="Envoyer" />
-//           </form>
-//         </div>
-//       </ul>
-//     </div>
-//   );
-// };
+//             <input
+//               type="file"
+//               name="uploadedFile"
+//               //   onChange={this.onInputChange}
+//               accept=""
+//             />
 
-// export default UploadRecette;
-import React, { Component } from "react";
+//             <br />
+//             <textarea
+//               value={this.state.ingredients}
+//               onChange={this.handleChange}
+//               name="ingredients"
+//               placeholder="Ingredients "
+//               rows="10"
+//             ></textarea>
+//             <br />
 
-export default class UploadRecette extends Component {
-  state = {
-    name: "",
-    ingedients: "",
-    preparations: "",
-    image: "",
-  };
-
-  async componentDidMount() {}
-
-  handleChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    const recette = { ...this.state };
-    try {
-      const token = localStorage.getItem("jwt");
-
-      console.log(token);
-      axios({
-        method: "post",
-        url: `${process.env.REACT_APP_API_URL}api/recettes/upload`,
-        headers: { Authorization: "Bearer " + token },
-        data: {
-          name: recette.name,
-          ingredients: recette.ingredients,
-          preparations: recette.preparations,
-          image: recette.image,
-        },
-      }).then((res) => this.setState());
-    } catch (e) {
-      console.log(e);
-    }
-
-    //rest : vider le formulaire
-    Object.keys(recette).forEach((item) => {
-      recette[item] = "";
-    });
-
-    this.setState({ ...recette });
-  };
-
-  render() {
-    return (
-      <div>
-        <form className="update-container" onSubmit={this.handleSubmit}>
-          <div className="update-recette">
-            <input
-              value={this.state.name}
-              onChange={this.handleChange}
-              name="name"
-              type="text"
-              placeholder="Nom de la recette"
-            />
-            {/* <input
-              value={this.state.image}
-              onChange={this.handleChange}
-              name="image"
-              type="text"
-              placeholder="Nom de l'image"
-            /> */}
-            <label htmlFor="file">Tèlècharger une image</label>
-            <input
-              value={this.state.image}
-              onChange={this.handleChange}
-              name="image"
-              //name="uploadedFile"
-            />
-            <textarea
-              value={this.state.ingredients}
-              onChange={this.handleChange}
-              name="ingredients"
-              placeholder="Ingredients "
-              rows="5"
-            ></textarea>
-            <textarea
-              value={this.state.preparations}
-              onChange={this.handleChange}
-              name="preparations"
-              placeholder="Preparations "
-              rows="15"
-            ></textarea>
-            <button type="submit"> + Ajouter recette</button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
-//   ajouterRecette = (recette) => {
-//     const recettes = { ...this.state.recette };
-//     recettes[`recette-${Date.now()}`] = recette;
-//     this.setState({ recettes });
-//   };
+//             <textarea
+//               value={this.state.preparations}
+//               onChange={this.handleChange}
+//               name="preparations"
+//               placeholder="Preparations "
+//               rows="15"
+//             ></textarea>
+//             <br />
+//             <button type="submit"> + Ajouter recette</button>
+//           </div>
+//         </form>
+//       </div>
+//     );
+//   }
+// }

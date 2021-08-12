@@ -82,10 +82,10 @@ const { UnauthorizedError } = require("../helpers/errors");
 
 // verification de token
 const isAuth = (request, response, next) => {
-  const token = request.cookies.jwt;
-  //   console.log(request.headers);
+  //   const token = request.cookies.jwt;
+  console.log(request.headers);
 
-  //   const token = request.headers.authorization.split("Bearer ")[1];
+  const token = request.headers.authorization.split("Bearer ")[1];
   jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
     if (error) {
       console.log(error);
@@ -99,6 +99,7 @@ const isAuth = (request, response, next) => {
         throw new UnauthorizedError("You must be login");
       }
       request.user = user;
+
       next();
     }
   });
@@ -136,20 +137,20 @@ module.exports = isAuth;
 // }
 
 // require authentification: correspondance à la base de données
-module.exports.requireAuth = (request, response, next) => {
-  const token = request.cookies.jwt;
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
-      if (err) {
-        console.log(err);
-        response.send(200).json("no token");
-      } else {
-        console.log(user.id);
-        response.user = user;
-        next();
-      }
-    });
-  } else {
-    console.log("No token");
-  }
-};
+// module.exports.requireAuth = (request, response, next) => {
+//   const token = request.cookies.jwt;
+//   if (token) {
+//     jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
+//       if (err) {
+//         console.log(err);
+//         response.send(200).json("no token");
+//       } else {
+//         console.log(user.id);
+//         response.user = user;
+//         next();
+//       }
+//     });
+//   } else {
+//     console.log("No token");
+//   }
+// };

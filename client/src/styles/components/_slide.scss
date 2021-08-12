@@ -1,0 +1,43 @@
+.containerSlide {
+    max-width: 850px;
+ margin: auto;
+    padding-top: 100px;
+
+
+}
+
+.containerSlide img {
+  width: 800px;
+  height: 400px;
+  @media (max-width: 650px) {
+    width: 200px;
+  height: 200px;
+   margin: auto;
+}
+
+}
+
+.etablissement{
+
+    display: flex;
+    justify-content: space-between;
+
+    div {
+margin: 80px;
+    }
+  
+
+    P{
+        text-align: center;
+        font-size: 1.4rem;
+       
+        
+    }    
+    @media (max-width: 650px) {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        margin-top: 90px;
+       
+    }
+}

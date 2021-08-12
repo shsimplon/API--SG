@@ -21,7 +21,7 @@ const recettesController = {
         },
       ],
     });
-    return { listRecettes };
+    return listRecettes;
   },
   getuserRecette: async (userRecette) => {
     const Recette = await recette.findAll({

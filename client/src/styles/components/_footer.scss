@@ -1,0 +1,47 @@
+.main-footer {
+    color: white;
+    background-color: #dc3545;
+    padding: 3em;
+    position: relative;
+    bottom: 10px;
+    width: 100%;
+    hr{
+
+    }
+    div.col p{
+   
+        color: white;
+    
+    }
+    .footer-site{
+    display: flex;
+justify-content: space-between
+
+;
+@media (max-width:354px){
+    flex-direction: column;
+  
+}
+    }
+
+.row{
+    padding-top: 2rem;
+    margin-left: 2rem;
+}
+.reseaux{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2rem;
+    
+}
+
+ .row p{
+    margin-left: 20rem;
+    @media (max-width:600px){
+        margin-left: 1rem;
+      
+    }
+
+}
+}
+

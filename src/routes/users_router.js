@@ -54,13 +54,18 @@ router.delete("/:id", isAuth, async (request, response) => {
   response.status(OK).json({ message: "L'user est supprimé avec succès" });
 });
 
-router.get(
-  "/logout/:id",
-  (async = (request, response) => {
-    response.cookie("jwt", "", { maxAge: 1 });
-    response.redirect("/");
-  })
-);
+// router.get(
+//   "/logout/:id",
+//   (async = (request, response) => {
+//     response.cookie("jwt", "", { maxAge: 1 });
+//     response.redirect("/");
+//   })
+// );
+
+// router.get("/logout/:id", (request, response) => {
+//   response.clearCookie("jwt");
+//   response.redirect("/");
+// });
 
 module.exports = router;
 

@@ -37,10 +37,10 @@ const index = () => {
           <Route path="/restaurants" exact component={Restaurant} />
           <Route path="/patisseries" exact component={Patisserie} />
           <Route path="/recette" exact component={Recette} />
-          <Route path="/recette" exact component={Recette} />
+          <Route path="/rajouter-recette" exact component={Recette} />
           <Route path="/profil" exact component={Profil} />
 
-          <AuthenticatedRoute path="/account"component={RajouterRecette}/>
+          <AuthenticatedRoute path="/account" component={RajouterRecette} />
 
           <Redirect to="/" />
         </Switch>

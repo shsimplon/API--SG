@@ -1,11 +1,14 @@
-import React from 'react';
+import React from "react";
+import Footer from "../components/Footer/Footer";
+import Recettes from "../components/Recettes";
 
 const Recette = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      <Recettes />
+      <Footer />
+    </div>
+  );
 };
 
 export default Recette;

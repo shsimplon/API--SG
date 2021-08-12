@@ -1,11 +1,14 @@
 const express = require("express");
-// const multer = require("multer");
-// const upload = multer();
+const multer = require("multer");
+const upload = multer();
+// const upload = multer({
+//   dest: "./upload/images",
+// });
+
 // const fs = require("fs");
 // const { promisify } = require("util");
 // const pipeline = promisify(require("stream").pipeline);
 // let fileupload = require("express-fileupload");
-// var fs = require("fs");
 
 const { OK, CREATED } = require("../helpers/status_codes");
 const {
@@ -56,7 +59,7 @@ router.post("/upload", isAuth, async (request, response) => {
   const recetteToAdd = request.body;
   recetteToAdd.userId = request.user.id;
   let uploadedFile = "";
-
+  console.log("ffffrrr", request.files);
   try {
     if (!request.files) {
       response.send({
@@ -76,6 +79,16 @@ router.post("/upload", isAuth, async (request, response) => {
   const newrecette = await addRecette(recetteToAdd);
   response.status(CREATED).json(newrecette);
 });
+
+// router.post("/upload", upload.single("image"), isAuth, async (req, res) => {
+//   const recetteToAdd = req.body;
+//   recetteToAdd.userId = req.user.id;
+
+//   console.log("file::::", req.image);
+//   console.log(recetteToAdd);
+//   const newrecette = await addRecette(recetteToAdd);
+//   res.status(CREATED).json(newrecette);
+// });
 
 router.put("/:id", async (request, response) => {
   const recette = request.body;

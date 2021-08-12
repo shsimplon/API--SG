@@ -1,0 +1,31 @@
+
+.recette-acceuil{
+
+max-width: 1200px;
+width: 800px;
+height: auto;
+line-height: 3rem;
+margin: 50px;
+font-size: 1.3rem;
+
+p  {
+    font-size: 1.3rem;
+     line-height: 3rem;
+
+
+}
+h3{
+    color: $color-5 ;
+    line-height: 3rem;
+}
+img{
+    width: 100%;
+    @media (max-width:650px) {
+    width: 300px;
+margin-left: none;
+    }
+    
+}
+
+
+}

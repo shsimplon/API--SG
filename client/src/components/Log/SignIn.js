@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { withRouter } from "react-router";
+// import { withRouter } from "react-router";
 const cookies = new Cookies();
 
 const SignIn = (props) => {
@@ -36,10 +36,10 @@ const SignIn = (props) => {
           passwordError.innerHTML = res.data.errors.password;
         } else {
           localStorage.setItem("jwt", res.data.token);
-          localStorage.setItem("userId", res.data.user.id);
+          //   localStorage.setItem("user", res.data.user.username);
           console.log(res.data);
-          // window.location = "/";
-          props.history.push("/");
+          window.location = "/";
+          //   props.history.push("/");
         }
       })
       .catch((err) => {
@@ -79,4 +79,5 @@ const SignIn = (props) => {
   );
 };
 
-export default withRouter(SignIn);
+// export default withRouter(SignIn);
+export default SignIn;
