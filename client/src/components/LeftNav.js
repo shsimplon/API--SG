@@ -21,14 +21,14 @@ const LeftNav = () => {
             <img
               src="./img/icons/restaurant.png"
               style={{ width: 45, height: 45 }}
-              alt="restaurant"
+              alt="resto"
             />
           </NavLink>
           <br />
           <NavLink to="/patisseries" exact activeClassName="active-left-nav">
             <img
               src="./img/icons/patisserie.png"
-              alt="patisseries"
+              alt="patisserie"
               style={{ width: 45, height: 45 }}
             />
           </NavLink>
@@ -36,7 +36,7 @@ const LeftNav = () => {
           <NavLink to="/recette" exact activeClassName="active-left-nav">
             <img
               src="./img/icons/ajouterRecette.png"
-              alt="recettes"
+              alt="recette"
               style={{ width: 45, height: 45 }}
             />
           </NavLink>
@@ -46,7 +46,7 @@ const LeftNav = () => {
             <NavLink to="/account" exact activeClassName="active-left-nav">
               <img
                 src="./img/icons/recette.png"
-                alt="ajouter recette"
+                alt="recette"
                 style={{ width: 45, height: 45 }}
               />
             </NavLink>

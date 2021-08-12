@@ -36,7 +36,7 @@ const SignIn = (props) => {
           passwordError.innerHTML = res.data.errors.password;
         } else {
           localStorage.setItem("jwt", res.data.token);
-          //   localStorage.setItem("user", res.data.user.username);
+          localStorage.setItem("user", res.data.user.id);
           console.log(res.data);
           window.location = "/";
           //   props.history.push("/");

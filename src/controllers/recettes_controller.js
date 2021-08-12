@@ -1,8 +1,4 @@
 const { recette, user } = require("../models");
-// const fs = require("fs");
-
-// const { promisify } = require("util");
-// const pipeline = promisify(require("stream").pipeline);
 const { BadRequestError, NotFoundError } = require("../helpers/errors");
 const { uploadErrors } = require("../utils/errors.utils");
 const recettesController = {
@@ -47,26 +43,7 @@ const recettesController = {
 
     return Recette;
   },
-  // addRecette: async (data, request) => {
-  //   const { name, ingredients, preparations, image } = data;
 
-  //   const Recette = await recette.findOne({
-  //     where: {
-  //       name,
-  //     },
-  //   });
-
-  //   if (Recette) {
-  //     throw new BadRequestError(
-  //       "Ressource existante",
-  //       "La Recette existe déjà"
-  //     );
-  //   }
-
-  //   const newRecette = await recette.create(data);
-
-  //   return newRecette;
-  // },
   addRecette: async (data, req, res) => {
     const { name, ingredients, preparations, image } = data;
     const Recette = await recette.findOne({

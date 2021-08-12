@@ -3,6 +3,8 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
 // const path = require("path");
+const multer = require("multer");
+
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cookies = require("cookie-parser");
@@ -18,6 +20,7 @@ const routes = require("./routes");
 const { notFoundHandler, errorLogger, errorHandler } = require("./middlewares");
 //instantiate server
 const server = express();
+const upload = multer();
 server.use(cors());
 // Enable file upload using express-fileupload
 server.use(
@@ -44,7 +47,7 @@ server.use(express.urlencoded({ extended: false }));
 server.use(cookies());
 
 // Static Files
-server.use(express.static("public"));
+server.use("/upload", express.static("public"));
 // server.use(fileUpload());
 // const corsOptions = {
 //   origin: process.env.CLIENT_URL,
