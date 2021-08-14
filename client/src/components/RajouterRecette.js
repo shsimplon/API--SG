@@ -4,7 +4,7 @@ import axios from "axios";
 import RecetteDetails from "./RecetteDetails";
 import UploadRecette from "./UploadRecette";
 
-const RajouterRecette = () => {
+const RajouterRecette = (props) => {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("jwt");
   const config = {
@@ -18,16 +18,21 @@ const RajouterRecette = () => {
       .get(`${process.env.REACT_APP_API_URL}api/recettes/userRecette/`, config)
       .then((res) => setData(res.data));
   }, []);
-  console.log(data);
 
   return (
     <>
       <div className="profil-page">
-        <UploadRecette />
+        <UploadRecette data={data} setData={setData} />
         <ul>
-          {data.map((recette) => (
-            <RecetteDetails recette={recette} key={recette.name} />
-          ))}
+          {data
+            .sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+            .map((recette) => {
+              return <RecetteDetails recette={recette} key={recette.name} />;
+            })}
         </ul>
       </div>
     </>

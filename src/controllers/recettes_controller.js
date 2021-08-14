@@ -1,6 +1,7 @@
 const { recette, user } = require("../models");
 const { BadRequestError, NotFoundError } = require("../helpers/errors");
 const { uploadErrors } = require("../utils/errors.utils");
+
 const recettesController = {
   getAllRecettes: async () => {
     const listRecettes = await recette.findAll({
@@ -24,15 +25,13 @@ const recettesController = {
       where: {
         userId: userRecette,
       },
-      attributes: { exclude: ["createdAt", "updatedAt"] },
       include: [
         {
           model: user,
-          attributes: ["username"],
+          attributes: ["username", "id"],
           as: "users",
         },
       ],
-      attributes: ["id", "name", "ingredients", "preparations", "userId"],
     });
     if (!Recette) {
       throw new NotFoundError(
@@ -44,8 +43,31 @@ const recettesController = {
     return Recette;
   },
 
+  //   addRecette: async (data, req, res) => {
+  //     const { name, ingredients, preparations, image } = data;
+  //     const Recette = await recette.findOne({
+  //       where: {
+  //         name,
+  //       },
+  //     });
+
+  //     if (Recette) {
+  //       throw new BadRequestError(
+  //         "Ressource existante",
+  //         "La Recette existe déjà"
+  //       );
+  //     }
+
+  //     const newRecette = await recette.create(data);
+
+  //     return newRecette;
+  //   },
+
+  ///avec multer
+
   addRecette: async (data, req, res) => {
     const { name, ingredients, preparations, image } = data;
+
     const Recette = await recette.findOne({
       where: {
         name,
@@ -64,6 +86,17 @@ const recettesController = {
     return newRecette;
   },
 
+  //Ajouter une image
+  //   addImage: async (data, id, req, res) => {
+  //     const image = data;
+  //     const Recette = await recette.findOne({
+  //         where: { id },
+  //       });
+
+  //     const newimage = await recette.create(data);
+
+  //     return newimage;
+  //   },
   updaterecette: async (id, data) => {
     const Recette = await recette.findOne({
       where: { id },

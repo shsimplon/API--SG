@@ -1,35 +1,32 @@
 /* eslint-disable no-undef */
-import axios from 'axios';
-import jwtDecode from 'jwt-decode';
-import { getItem, addItem, removeItem } from './LocaleStorage';
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import { getItem, addItem, removeItem } from "./LocaleStorage";
 
+const api = axios.create({
+  baseURL: `http://localhost:8080`,
+});
 
-// const api = axios.create({
-//     baseURL:`http://localhost:8080/api`,
-   
-//   });
-  
-//   api.interceptors.request.use((config) => {
-//     const token = localStorage.getItem('token');
-//     if(token) {
-//       config.headers.Authorization = 'Bearer ' + token;
-//     }
-//     return config;
-//   });
-  
-//   export default api;
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("jwt");
 
- export function hasAuthenticated() {
-   const token = localStorage.getItem('jwt');
-   console .log(token)
-    if(token) {
-     return true
-    }
-    return false;
+  if (token) {
+    config.headers["Authorization"] = "Bearer " + token;
+  }
+
+  return config;
+});
+
+export default api;
+
+export function hasAuthenticated() {
+  const token = localStorage.getItem("jwt");
+  console.log(token);
+  if (token) {
+    return true;
+  }
+  return false;
 }
-
-    
-
 
 //  export function login(credentials) {
 //     return axios

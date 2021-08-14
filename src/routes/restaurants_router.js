@@ -18,21 +18,6 @@ router.get("/:name", async (request, response) => {
 });
 
 router.post("/", async (request, response) => {
-  // if (request.files !== null) {
-  //   try {
-  //     if (
-  //       request.files != "image/jpg" &&
-  //       request.files!= "image/png" &&
-  //       request.files!= "image/jpeg"
-  //     )
-  //       throw Error("invalid file");
-
-  //     if (request.files.size > 500000) throw Error("max size");
-  //   } catch (err) {
-  //     const errors = uploadErrors(err);
-  //     return response.status(201).json({ errors });
-  //   }
-
   if (!request.files) {
     response.send({
       status: false,

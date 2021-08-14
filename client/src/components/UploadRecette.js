@@ -3,50 +3,41 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import React, { useState, useEffect } from "react";
+import api from "../services/AuthApi";
 
-const UploadRecette = () => {
-  const [data, setData] = useState([]);
-  const [file, setFile] = useState(null);
+const UploadRecette = (props) => {
+  //   const [data, setData] = useState([]);
+  const [avatar, setAvatar] = useState("");
   const [name, setName] = useState();
   const [ingredients, setIngredients] = useState();
   const [preparations, setPreparations] = useState();
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(file);
     const token = localStorage.getItem("jwt");
-    const upload = new FormData();
-    upload.append("file", file);
-    console.log("ccccccccccc", upload);
-    const config = {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    };
-
-    axios({
-      method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/recettes/upload`,
-      headers: { Authorization: "Bearer " + token },
-
-      data: {
-        name,
-        ingredients,
-        preparations,
-      },
-      upload,
-    }).then((res) => console.log(res));
+    const imgData = new FormData();
+    imgData.append("name", name);
+    imgData.append("avatar", avatar);
+    imgData.append("ingredients", ingredients);
+    imgData.append("preparations", preparations);
+    const response = await api.post(`/api/recettes/upload`, imgData);
+    props.setData([...props.data, response.data]);
   };
 
   return (
     <div>
-      <form className="update-container">
+      <form
+        action="/uploadfile"
+        enctype="multipart/form-data"
+        className="update-container"
+      >
         <div className="update-recette">
-          <input
+          <textarea
             name="name"
             type="text"
+            rows="2"
             placeholder="Nom de la recette"
             onChange={(event) => {
               const { value } = event.target;
@@ -54,32 +45,22 @@ const UploadRecette = () => {
             }}
           />
           <br />
-          <input
-            type="file"
-            id="file"
-            name="file"
-            onChange={(event) => {
-              const file = event.target.files[0];
-              setFile(file);
-            }}
-          />
-
-          <br />
-          <input
+          <textarea
             name="ingredients"
             type="text"
-            placeholder="Nom de la recette"
+            placeholder="Ingredients"
+            rows="15"
             onChange={(event) => {
               const { value } = event.target;
               setIngredients(value);
             }}
           />
           <br />
-
-          <input
+          <textarea
             name="preparations"
             type="text"
-            placeholder="Nom de la recette"
+            placeholder="Preparations"
+            rows="15"
             onChange={(event) => {
               const { value } = event.target;
               setPreparations(value);
@@ -89,7 +70,18 @@ const UploadRecette = () => {
           <button onClick={onSubmit} type="submit">
             {" "}
             + Ajouter recette
-          </button>
+          </button>{" "}
+        </div>
+        <div className="profil-page">
+          <div className="left-part">
+            <input
+              type="file"
+              id="file-upload"
+              name="file"
+              accept=""
+              onChange={(e) => setAvatar(e.target.files[0])}
+            />
+          </div>
         </div>
       </form>
     </div>
@@ -97,15 +89,17 @@ const UploadRecette = () => {
 };
 
 export default UploadRecette;
+
+///sans photo
+
 // import React, { Component } from "react";
+// import UploadImg from "./uploadImg/UploadImg";
 
 // export default class UploadRecette extends Component {
 //   state = {
 //     name: "",
 //     ingedients: "",
 //     preparations: "",
-//     image: "",
-//     file: "",
 //   };
 
 //   async componentDidMount() {}
@@ -114,9 +108,11 @@ export default UploadRecette;
 //     const { name, value } = event.target;
 //     this.setState({ [name]: value });
 //   };
-//   //   onInputChange = (e) => {
-//   //     this.setState(e.target.files);
-//   //   };
+//   onInputChange = (e) => {
+//     this.setState({
+//       image: e.target.files[0],
+//     });
+//   };
 
 //   handleSubmit = (event) => {
 //     event.preventDefault();
@@ -125,19 +121,23 @@ export default UploadRecette;
 
 //     try {
 //       const token = localStorage.getItem("jwt");
+//       //   const image = new FormData();
 
+//       //   image.append("image", this.state.image, this.state.image.name);
 //       axios({
 //         method: "post",
-//         url: `${process.env.REACT_APP_API_URL}api/recettes/upload`,
-//         headers: { Authorization: "Bearer " + token },
+//         url: `${process.env.REACT_APP_API_URL}api/recettes`,
+
+//         headers: {
+//           Authorization: "Bearer " + token,
+//         },
 //         data: {
 //           name: recette.name,
 //           ingredients: recette.ingredients,
 //           preparations: recette.preparations,
-
-//           image: recette.uploadedFile,
+//           //   image,
 //         },
-//       }).then((res) => this.setState());
+//       }).then((res) => console.log(res));
 //     } catch (e) {
 //       console.log(e);
 //     }
@@ -162,13 +162,8 @@ export default UploadRecette;
 //               type="text"
 //               placeholder="Nom de la recette"
 //             />
-//             <br />
-//             <input
-//               type="file"
-//               name="uploadedFile"
-//               //   onChange={this.onInputChange}
-//               accept=""
-//             />
+//             {/* <br />
+//             <input type="file" onChange={this.onInputChange} accept="" /> */}
 
 //             <br />
 //             <textarea
@@ -187,8 +182,17 @@ export default UploadRecette;
 //               placeholder="Preparations "
 //               rows="15"
 //             ></textarea>
+
 //             <br />
 //             <button type="submit"> + Ajouter recette</button>
+//           </div>
+
+//           <div className="profil-page">
+//             <div className="left-part">
+//               <input type="file" accept="" />
+//               <button type="submit"> + Telecharger une photo</button>
+//               <div className="profil-page">{/* <UploadImg /> */}</div>
+//             </div>
 //           </div>
 //         </form>
 //       </div>

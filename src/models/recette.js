@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       image: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT("long"),
         // defaultValue: "./uploads/etablissements/random-.png"
       },
       video: {

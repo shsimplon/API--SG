@@ -82,10 +82,9 @@ const { UnauthorizedError } = require("../helpers/errors");
 
 // verification de token
 const isAuth = (request, response, next) => {
-  //   const token = request.cookies.jwt;
-  console.log(request.headers);
+  //const token = request.cookies.jwt;
+  const token = request.headers.authorization.split(" ")[1];
 
-  const token = request.headers.authorization.split("Bearer ")[1];
   jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
     if (error) {
       console.log(error);

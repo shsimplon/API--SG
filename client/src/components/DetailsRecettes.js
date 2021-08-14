@@ -26,7 +26,8 @@ const DetailsRecettes = (props) => {
         </div>
         <div className="left-part">
           <h3>Photo de recette</h3>
-          <img src={`data:image,${recette.image}`} alt="image recette" />
+          <img src={`data:image;base64,${recette.image}`} alt="restaurant" />
+          {/* <img alt="" src={recette.image} /> */}
           {/* <img src={image} alt="photo" /> */}
         </div>
       </ul>

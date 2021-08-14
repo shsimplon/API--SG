@@ -1,12 +1,6 @@
 const express = require("express");
-const multer = require("multer");
-const upload = multer();
-// const upload = multer().single("file");
 
-const fs = require("fs");
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
-const { uploadErrors } = require("../utils/errors.utils");
+// const { uploadErrors } = require("../utils/errors.utils");
 
 // let fileupload = require("express-fileupload");
 
@@ -17,6 +11,7 @@ const {
   getuserRecette,
   addRecette,
   updaterecette,
+  addImage,
   deleteOne,
 } = require("../controllers/recettes_controller");
 const { djValidation } = require("../validators");
@@ -41,16 +36,56 @@ router.get("/userRecette", isAuth, async (request, response) => {
   const recette = request;
   recette.userId = request.user.id;
 
-  console.log(recette.userId);
-
   const resultat = await getuserRecette(recette.userId);
 
   response.status(OK).json(resultat);
 });
+///rajouter seulemtn la photo
+// router.post("/upload/:id", isAuth, async (request, response) => {
+//   const imagetoAdd = request.body;
+//   imagetoAdd.Id = request.user.id;
 
+//   console.log(request.files);
+
+//   //converting images to base 64 and save it in database
+//   let file = request.files.file;
+//   const img = file.data;
+//   const data = img.toString("base64");
+//   request.body.image = data;
+//   await file.mv("../../public/recettes/" + file.name);
+
+//   const newImage = await addImage(request.params.id, request.body);
+//   response.status(CREATED).json(newImage);
+// });
+///
+/////
+//rajouter photo
+// router.post("/upload", isAuth, async (request, response) => {
+//   const imageToAdd = request.body;
+//   imageToAdd.userId = request.user.id;
+//   //   if (!request.files) {
+//   //     response.send({
+//   //       status: false,
+//   //       message: "No file uploaded",
+//   //     });
+//   //   } else {
+//   //     console.log("moiiiiiiii", request.files);
+
+//   //   let file = request.files.file;
+//   //   const img = file.data;
+//   //   const data = img.toString("base64");
+//   //   request.body.image = data;
+//   //   await file.mv("./public/uploads/" + file.name);
+//   //   //   }
+//   //   const newrecette = await addRecette(request.body);
+//   //   response.status(CREATED).json(newrecette);
+// });
+
+//////upload avec fileexpress
 router.post("/upload", isAuth, async (req, res) => {
   const recetteToAdd = req.body;
   recetteToAdd.userId = req.user.id;
+
   if (!req.files) {
     res.send({
       status: false,
@@ -59,46 +94,22 @@ router.post("/upload", isAuth, async (req, res) => {
   } else {
     let avatar = req.files.avatar;
 
-    await avatar.mv("./public/uploads/images" + avatar.name);
+    const img = avatar.data;
+    const data = img.toString("base64");
+    req.body.image = data;
 
-    console.log(recetteToAdd.userId);
-    recetteToAdd.image = "/uploads/images/" + avatar.name;
-
-    const newrecette = await addRecette(recetteToAdd);
+    const newrecette = await addRecette(req.body);
     res.status(CREATED).json(newrecette);
   }
 });
 
-// router.post("/upload", isAuth, async (request, response) => {
-//   const recetteToAdd = request.body;
-//   recetteToAdd.userId = request.user.id;
-//   let uploadedFile = "";
-//   console.log("ffffrrr", request.files);
-//   try {
-//     if (!request.files) {
-//       response.send({
-//         status: false,
-//         message: "Error: No file uploaded",
-//       });
-//     } else {
-//       uploadedFile = request.files.uploadedFile;
-//       uploadedFile.mv("./uploadedFiles/" + uploadedFile.name);
-//     }
-//   } catch (err) {
-//     response.json({ Error: "Error while uploading file." });
-//   }
+////////
 
-//   recetteToAdd.image = "./uploadedFiles/" + uploadedFile.name;
-//   console.log(recetteToAdd);
-//   const newrecette = await addRecette(recetteToAdd);
-//   response.status(CREATED).json(newrecette);
-// });
-
-// router.post("/upload", upload.single("image"), isAuth, async (req, res) => {
+//rajouter recettes sans file
+// router.post("/", isAuth, async (req, res) => {
 //   const recetteToAdd = req.body;
 //   recetteToAdd.userId = req.user.id;
 
-//   console.log("file::::", req.image);
 //   console.log(recetteToAdd);
 //   const newrecette = await addRecette(recetteToAdd);
 //   res.status(CREATED).json(newrecette);
