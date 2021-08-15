@@ -8,3 +8,19 @@
       }
     }
   
+    .etablissement-lien{
+        li
+        {
+          margin-top: 20px; 
+        
+        }
+
+        button{
+            margin-left: 10rem;
+        }
+        @media (max-width: 600px){
+            button{
+                margin-top: 2rem;
+            }
+        }
+    }

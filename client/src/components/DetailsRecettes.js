@@ -21,14 +21,15 @@ const DetailsRecettes = (props) => {
           <li>
             {" "}
             <h3>Preparations:</h3> <br />
-            Preparations {recette.preparations}
+            {recette.preparations}
           </li>
         </div>
-        <div className="left-part">
-          <h3>Photo de recette</h3>
-          <img src={`data:image;base64,${recette.image}`} alt="restaurant" />
-          {/* <img alt="" src={recette.image} /> */}
-          {/* <img src={image} alt="photo" /> */}
+        <div className="left-part ">
+          <img
+            src={`data:image;base64,${recette.image}`}
+            style={{ width: "100%", height: "100%" }}
+            alt="recette"
+          />
         </div>
       </ul>
     </div>

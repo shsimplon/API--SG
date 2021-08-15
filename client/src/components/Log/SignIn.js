@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
 // import { withRouter } from "react-router";
-const cookies = new Cookies();
 
 const SignIn = (props) => {
   const [email, setemail] = useState("");

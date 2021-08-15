@@ -1,6 +1,4 @@
 import React from "react";
-import axios from "axios";
-import cookie from "js-cookie";
 // import { withRouter } from "react-router-dom";
 
 const Logout = () => {

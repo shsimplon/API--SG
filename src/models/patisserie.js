@@ -17,22 +17,17 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-
       },
       place: {
         type: DataTypes.STRING,
         allowNull: false,
-
       },
       image: {
-        type: DataTypes.TEXT,
-        // defaultValue: "./uploads/etablissements/random-.png"
-
+        type: DataTypes.TEXT("long"),
       },
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
-
       },
       createdAt: {
         allowNull: false,

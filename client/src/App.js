@@ -1,11 +1,9 @@
 /* eslint-disable no-undef */
 // import {UidContext} from "./components/AppContext"
-import axios from "axios";
-import React, { useEffect, useState } from 'react';
 
-import Routes from './components/Routes'
+import Routes from "./components/Routes";
 
-function App () {
+function App() {
   //stocker le user sur notre app
   // const [uid, setUid] = useState (null);
   // useEffect(() => {
@@ -28,10 +26,9 @@ function App () {
 
   return (
     <div>
-  
-      <Routes/>
-   </div>
+      <Routes />
+    </div>
   );
-};
+}
 
 export default App;

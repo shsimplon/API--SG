@@ -17,9 +17,15 @@ const Recettes = () => {
     <>
       <div className="profil-page">
         <ul>
-          {data.map((recette) => (
-            <DetailsRecettes recette={recette} key={recette.name} />
-          ))}
+          {data
+            .sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+            .map((recette) => (
+              <DetailsRecettes recette={recette} key={recette.name} />
+            ))}
         </ul>
       </div>
     </>

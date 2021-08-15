@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 import axios from "axios";
-import jwtDecode from "jwt-decode";
-import { getItem, addItem, removeItem } from "./LocaleStorage";
 
 const api = axios.create({
   baseURL: `http://localhost:8080`,

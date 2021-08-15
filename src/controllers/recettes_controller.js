@@ -5,10 +5,6 @@ const { uploadErrors } = require("../utils/errors.utils");
 const recettesController = {
   getAllRecettes: async () => {
     const listRecettes = await recette.findAll({
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
-
       order: [["name", "ASC"]],
       include: [
         {

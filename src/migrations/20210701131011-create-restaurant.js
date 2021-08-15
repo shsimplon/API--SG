@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('restaurants', {
+    await queryInterface.createTable("restaurants", {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -11,33 +11,29 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-      
       },
       place: {
         type: Sequelize.STRING,
-       allowNull: false,
-     
+        allowNull: false,
       },
       image: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT("long"),
       },
       description: {
         type: Sequelize.TEXT,
         allowNull: false,
-      
-
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('restaurants');
-  }
+    await queryInterface.dropTable("restaurants");
+  },
 };
