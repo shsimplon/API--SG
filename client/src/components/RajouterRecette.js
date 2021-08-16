@@ -30,8 +30,8 @@ const RajouterRecette = (props) => {
                 new Date(b.createdAt).getTime() -
                 new Date(a.createdAt).getTime()
             )
-            .map((recette) => {
-              return <RecetteDetails recette={recette} key={recette.name} />;
+            .map((recette, i) => {
+              return <RecetteDetails recette={recette} key={i} />;
             })}
         </ul>
       </div>

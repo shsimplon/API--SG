@@ -38,28 +38,22 @@ const recettesController = {
 
     return Recette;
   },
+  //trouver une recette
+  getOneRecette: async (id) => {
+    const RecetteUne = await recette.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!RecetteUne) {
+      throw new NotFoundError(
+        "Ressource introuvable",
+        "Cette recette n'existe pas"
+      );
+    }
 
-  //   addRecette: async (data, req, res) => {
-  //     const { name, ingredients, preparations, image } = data;
-  //     const Recette = await recette.findOne({
-  //       where: {
-  //         name,
-  //       },
-  //     });
-
-  //     if (Recette) {
-  //       throw new BadRequestError(
-  //         "Ressource existante",
-  //         "La Recette existe déjà"
-  //       );
-  //     }
-
-  //     const newRecette = await recette.create(data);
-
-  //     return newRecette;
-  //   },
-
-  ///avec multer
+    return RecetteUne;
+  },
 
   addRecette: async (data, req, res) => {
     const { name, ingredients, preparations, image } = data;
@@ -82,17 +76,6 @@ const recettesController = {
     return newRecette;
   },
 
-  //Ajouter une image
-  //   addImage: async (data, id, req, res) => {
-  //     const image = data;
-  //     const Recette = await recette.findOne({
-  //         where: { id },
-  //       });
-
-  //     const newimage = await recette.create(data);
-
-  //     return newimage;
-  //   },
   updaterecette: async (id, data) => {
     const Recette = await recette.findOne({
       where: { id },
