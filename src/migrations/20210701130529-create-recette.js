@@ -35,6 +35,9 @@ module.exports = {
       },
       likes: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+
+        defaultValue: "0",
       },
       createdAt: {
         allowNull: false,

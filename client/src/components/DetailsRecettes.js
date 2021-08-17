@@ -1,8 +1,28 @@
-import React from "react";
-// import image from "../assets/img/doowap.png"; // with import
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
+import { AiFillLike } from "react-icons/ai";
+import api from "../services/AuthApi";
 
 const DetailsRecettes = (props) => {
   const { recette } = props;
+  //   const [data, setData] = useState([]);
+  //   const [likes, setLikes] = useState([]);
+
+  const likeRecette = async (id, i) => {
+    await api
+      .post("api/likes", {
+        userId: localStorage.getItem("user"),
+
+        recetteId: id,
+      })
+      .then((response) => {
+        // setData(response.data);
+        console.log("cc");
+        window.location.reload();
+      });
+  };
 
   return (
     <div>
@@ -31,7 +51,20 @@ const DetailsRecettes = (props) => {
             alt="recette"
           />
         </div>
-        ccc
+        <span
+          id="likeButton"
+          onClick={() => {
+            likeRecette(recette.id);
+          }}
+          style={{
+            paddingLeft: "20%",
+            color: "rgb(220,52,68)",
+            fontSize: 30,
+          }}
+        >
+          <AiFillLike />
+          {recette.likes}
+        </span>
       </ul>
     </div>
   );

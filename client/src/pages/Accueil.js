@@ -19,7 +19,6 @@ const Accueil = () => {
       <br />
       <div className="recette-acceuil">
         <h3>Livret de recettes sans gluten</h3>
-        <p></p>
         <br />
         Pour des recettes de base faciles et rapides. Voici quelques recettes
         pour devenir un « chef sans gluten ».

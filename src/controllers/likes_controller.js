@@ -15,7 +15,7 @@ const likesController = {
     if (LIKE) {
       throw new BadRequestError(
         "Ressource existante",
-        "cette recette est déja liker par cette user"
+        "cette recette est déja liké"
       );
     }
 
@@ -29,7 +29,6 @@ const likesController = {
       like = 0;
     }
     like = Recette.likes + 1;
-    // Recette.likes = Recette.likes + 1;
 
     await Recette.update({ likes: like });
 

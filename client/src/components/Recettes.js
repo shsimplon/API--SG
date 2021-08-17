@@ -23,8 +23,8 @@ const Recettes = () => {
                 new Date(b.createdAt).getTime() -
                 new Date(a.createdAt).getTime()
             )
-            .map((recette) => (
-              <DetailsRecettes recette={recette} key={recette.name} />
+            .map((recette, i) => (
+              <DetailsRecettes recette={recette} key={i} />
             ))}
         </ul>
       </div>
