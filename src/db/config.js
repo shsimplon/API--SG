@@ -1,7 +1,7 @@
 module.exports = {
   development: {
-    username: "root",
-    password: "1985Athelete",
+    // username: "root",
+    // password: "1985Athelete",
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: "api-sans-Gluten",

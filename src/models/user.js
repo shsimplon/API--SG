@@ -8,8 +8,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.recette, {
         foreignKey: "userId",
-        as: "recettes",
+        // as: "recettes",
       });
+      //   this.belongsToMany(models.recette, {
+      //     through: "jaimes",
+      //     foreignKey: "userId",
+      //     as: "users",
+      //   });
     }
   }
   user.init(

@@ -1,40 +1,36 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class like extends Model {
+  class jaime extends Model {
     static associate(models) {
-      
-      models.user.belongsToMany(models.recette, {
-        through: "likes",
-        foreignKey: "userId",
-        as: "users",
-      });
-      models.recette.belongsToMany(models.user, {
-        through: "likes",
+      this.belongsTo(models.recette, {
         foreignKey: "recetteId",
-        as: "recettes",
       });
-
-     this.belongsTo(models.user, {
+      this.belongsTo(models.user, {
         foreignKey: "userId",
       });
 
-     this.belongsTo(models.recette, {
-        foreignKey: "recetteId",
-      });
+      //   models.jaime.belongsTo(models.user, {
+      //     foreignKey: "userId",
+      //     // as: "users",
+      //   });
+
+      //   models.jaime.belongsTo(models.recette, {
+      //     foreignKey: "recetteId",
+      //     // as: "recettes",
+      //   });
     }
   }
-  like.init(
+  jaime.init(
     {
       id: {
-        allowNull: false,
         primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
       },
       recetteId: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         references: {
           model: "recettes",
@@ -43,14 +39,14 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+
         allowNull: false,
         references: {
           model: "users",
           key: "id",
         },
       },
-      isLike: {
+      islikes: {
         type: DataTypes.INTEGER,
       },
 
@@ -65,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "like",
+      modelName: "jaime",
     }
   );
-  return like;
+  return jaime;
 };

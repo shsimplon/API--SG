@@ -1,14 +1,14 @@
 const express = require("express");
 require("express-async-errors");
-const multer = require("multer");
-const upload = multer();
+// const multer = require("multer");
+// const upload = multer();
 
 const restaurantsRouter = require("./restaurants_router");
 const patisseriesRouter = require("./patisseries_router");
 const recettesRouter = require("./recettes_router");
 const userRouter = require("./users_router.js");
 const likeRouter = require("./likes_router");
-//  const uploadController = require ("./upload_router")
+const uploadController = require("./upload_router");
 
 const mainRouter = express.Router();
 
@@ -21,7 +21,7 @@ mainRouter.use("/users", userRouter);
 
 //   mainRouter.use('/uploaduser',uploadController);
 
-// Likes
+//Likes
 mainRouter.use("/likes", likeRouter);
 
 module.exports = mainRouter;

@@ -31,6 +31,7 @@ const DetailsRecettes = (props) => {
             alt="recette"
           />
         </div>
+        ccc
       </ul>
     </div>
   );

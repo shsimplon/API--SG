@@ -9,11 +9,11 @@ const DetailsPatisserie = (props) => {
 
         <div className="data-container">
           <ul>
-            <li>{patisserie.name}</li>
+            <li style={{ fontSize: "1.4rem" }}>{patisserie.name}</li>
             <br />
             <li>{patisserie.place}</li>
             <br />
-            <li>{patisserie.description}</li>
+            <li style={{ fontSize: "1rem" }}>{patisserie.description}</li>
           </ul>
         </div>
       </li>

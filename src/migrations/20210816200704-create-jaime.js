@@ -1,34 +1,30 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("likes", {
+    await queryInterface.createTable("jaimes", {
       id: {
-        allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
       recetteId: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         references: {
           model: "recettes",
           key: "id",
-        }
+        },
       },
       userId: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         references: {
           model: "users",
           key: "id",
-        }
+        },
       },
-      isLike : {
-        allowNull: false,
-        type: Sequelize.INTEGER
+      islikes: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +37,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("likes");
+    await queryInterface.dropTable("jaimes");
   },
 };
