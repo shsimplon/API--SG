@@ -14,7 +14,7 @@ const UploadRecette = (props) => {
   const [ingredients, setIngredients] = useState();
   const [preparations, setPreparations] = useState();
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event, recette) => {
     event.preventDefault();
     const token = localStorage.getItem("jwt");
     const imgData = new FormData();
@@ -33,8 +33,9 @@ const UploadRecette = (props) => {
         enctype="multipart/form-data"
         className="update-container"
       >
-        <div className="update-recette">
+        <div className="update-recette form-recette">
           <textarea
+            className="textarea-form"
             name="name"
             type="text"
             rows="2"
@@ -46,6 +47,7 @@ const UploadRecette = (props) => {
           />
           <br />
           <textarea
+            className="textarea-form"
             name="ingredients"
             type="text"
             placeholder="Ingredients"
@@ -57,6 +59,7 @@ const UploadRecette = (props) => {
           />
           <br />
           <textarea
+            className="textarea-form"
             name="preparations"
             type="text"
             placeholder="Preparations"
