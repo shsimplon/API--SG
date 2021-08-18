@@ -18,7 +18,6 @@ const DetailsRecettes = (props) => {
         recetteId: id,
       })
       .then((response) => {
-        // setData(response.data);
         console.log("cc");
         window.location.reload();
       });

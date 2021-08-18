@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
           model: "recettes",
           key: "id",
         },
+        onDelete: "CASCADE",
       },
       userId: {
         type: DataTypes.UUID,
@@ -45,9 +46,7 @@ module.exports = (sequelize, DataTypes) => {
           model: "users",
           key: "id",
         },
-      },
-      islikes: {
-        type: DataTypes.INTEGER,
+        onDelete: "CASCADE",
       },
 
       createdAt: {
