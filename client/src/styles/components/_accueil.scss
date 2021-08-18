@@ -2,14 +2,12 @@
 .recette-acceuil{
 
 max-width: 1200px;
-width: 800px;
 height: auto;
 line-height: 3rem;
 margin: 50px;
 font-size: 1.3rem;
 
 p  {
-    font-size: clamp(10px, 4em, 18px);
      line-height: 3rem;
 
 
@@ -21,10 +19,7 @@ h3{
 }
 img{
     width: 100%;
-    @media (max-width:650px) {
-    width: 300px;
-margin-left: none;
-    }
+
     
 }
 

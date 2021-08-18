@@ -17,7 +17,7 @@ const DetailsRestaurant = (props) => {
         </div>
       </li>
 
-      <a href={"" + restaurant.lien}>
+      <a href={"" + restaurant.lien} target="_blank" rel="noreferrer">
         <button>DÉCOUVRIR</button>
       </a>
     </div>

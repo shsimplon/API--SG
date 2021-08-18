@@ -21,13 +21,13 @@ const Accueil = () => {
         <h3>Livret de recettes sans gluten</h3>
         <br />
         Pour des recettes de base faciles et rapides. Voici quelques recettes
-        pour devenir un « chef sans gluten ».
+        pour devenir un « chef sans gluten »
         <a href="/recette">
           <button> Publication en ligne</button>
         </a>
         <br />
         <h3>Cuisiner sans gluten</h3>
-        <img src={image} style={{ marginLeft: 50 }} />
+        <img src={image} />
         <p>
           Imaginer des recettes variées, simples à réaliser, qui plaisent à tous
           et sans gluten ne nécessite pas forcément d’être un cuisinier

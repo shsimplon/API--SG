@@ -56,11 +56,6 @@ const DetailsRecettes = (props) => {
           onClick={() => {
             likeRecette(recette.id);
           }}
-          style={{
-            paddingLeft: "20%",
-            color: "rgb(220,52,68)",
-            fontSize: 30,
-          }}
         >
           <AiFillLike />
           {recette.likes}

@@ -9,15 +9,15 @@ const DetailsPatisserie = (props) => {
 
         <div className="data-container">
           <ul>
-            <li style={{ fontSize: "1.4rem" }}>{patisserie.name}</li>
-            <br />
+            <li>{patisserie.name}</li>
+
             <li>{patisserie.place}</li>
-            <br />
-            <li style={{ fontSize: "1rem" }}>{patisserie.description}</li>
+
+            <li>{patisserie.description}</li>
           </ul>
         </div>
       </li>
-      <a href={"" + patisserie.lien}>
+      <a href={"" + patisserie.lien} target="_blank" rel="noreferrer">
         <button>DÉCOUVRIR</button>
       </a>
     </div>

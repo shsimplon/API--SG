@@ -24,10 +24,10 @@
           margin: 10px 10px;
         }
       }
-      .left-part {
-        text-align: center;
+//       .left-part {
+//         text-align: center;
   
-}
+// }
 
 }
 }
@@ -36,3 +36,17 @@ input, textarea {
     text-align: center;
     padding-top: 5px;
 } 
+span#likeButton{
+   
+padding-left: 20%;
+ color: rgb(220,52,68);
+font-size: 30px,
+         
+}
+span#likeButton:hover{
+    cursor: pointer;
+}
+span#likeButton:active{
+    color: black;
+
+}
