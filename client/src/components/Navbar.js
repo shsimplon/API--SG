@@ -24,12 +24,7 @@ const Navbar = () => {
           <ul>
             <li></li>
             <li className="welcome">
-              {/* <NavLink exact to="/profil"> */}
-              <h5>
-                Bienvenue
-                {/* {user.username} */}
-              </h5>
-              {/* </NavLink> */}
+              <h5>Bienvenue</h5>
               <NavLink to="/account">Mon compte</NavLink>
             </li>
             <Logout />

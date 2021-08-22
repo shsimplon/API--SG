@@ -29,15 +29,6 @@ server.use(
     createParentPath: true,
   })
 );
-// const corsOptions = {
-//   origin: process.env.CLIENT_URL,
-//   credentials: true,
-//   allowedHeaders: ["sessionId", "Content-Type"],
-//   exposedHeaders: ["sessionId"],
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   preflightContinue: false,
-// };
-// server.use(cors(corsOptions));
 
 //use les dependences
 server.use(helmet());
@@ -51,16 +42,7 @@ server.use(cookies());
 server.use("/upload", express.static("public"));
 // server.use(fileUpload());
 
-//configure routes
-// server.get("/", function (req, res) {
-//   res.setHeader("content-type", "text/html");
-//   res.status(200).send("<h1>bonjour mon projet</h1>");
-// });
-
-// jwt
-// server.get("/jwtid", requireAuth, (request, response) => {
-//   response.status(200).send(response.user.id);
-// });
+// server.use(helmet.xssFilter());
 
 server.use("/api", routes);
 server.use(isAuth);

@@ -35,7 +35,7 @@ const Accueil = () => {
         </p>
         <br />
         <a href="/account">
-          <button>Rajouter une recette</button>
+          <button>Ajouter une recette</button>
         </a>
       </div>
       <Footer />

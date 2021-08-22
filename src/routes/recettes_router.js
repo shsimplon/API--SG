@@ -14,12 +14,13 @@ const {
   addImage,
   deleteOne,
 } = require("../controllers/recettes_controller");
-const { djValidation } = require("../validators");
+const { dataValidations } = require("../validators");
 const { ValidationError } = require("../helpers/errors");
 const recettesController = require("../controllers/recettes_controller");
 const isAuth = require("../middlewares/auth.middleware.js");
 const recette = require("../models/recette");
 const { request } = require("express");
+const dataValidation = require("../validators/dataValidation");
 const router = express.Router();
 
 router.get("/", async (_request, response) => {
@@ -45,6 +46,8 @@ router.get("/userRecette", isAuth, async (request, response) => {
 router.post("/upload", isAuth, async (req, res) => {
   const recetteToAdd = req.body;
   recetteToAdd.userId = req.user.id;
+  const errors = dataValidations(dataValidation);
+  if (errors) throw new ValidationError(errors);
 
   if (!req.files) {
     res.send({

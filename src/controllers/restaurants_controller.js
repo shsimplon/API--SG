@@ -45,6 +45,39 @@ const restaurantController = {
       return newRestaurant;
     }
   },
+  updateRestaurant: async (id, data) => {
+    const Restaurant = await restaurant.findOne({
+      where: { id },
+    });
+    if (!Restaurant) {
+      throw new NotFoundError("LA recette n'existe pas");
+    }
+    await Restaurant.update(data);
+
+    const newRestaurant = await restaurant.findOne({
+      where: {
+        id,
+      },
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
+
+    return newRestaurant;
+  },
+  deleteOne: async (id) => {
+    const restaurantFound = await restaurant.findOne({
+      where: { id },
+    });
+    if (!restaurantFound) {
+      throw new NotFoundError(
+        "Ressource introuvable",
+        "Ce restaurant n'existe pas"
+      );
+    }
+
+    await restaurant.destroy({
+      where: { id },
+    });
+  },
 };
 
 module.exports = restaurantController;

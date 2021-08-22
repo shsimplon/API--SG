@@ -47,5 +47,38 @@ const patisserieController = {
       return newPatisserie;
     }
   },
+  updatePatisserie: async (id, data) => {
+    const Patisserie = await patisserie.findOne({
+      where: { id },
+    });
+    if (!Patisserie) {
+      throw new NotFoundError("LA patisserie n'existe pas");
+    }
+    await Patisserie.update(data);
+
+    const newPatisserie = await patisserie.findOne({
+      where: {
+        id,
+      },
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
+
+    return newPatisserie;
+  },
+  deleteOne: async (id) => {
+    const patisserieFound = await patisserie.findOne({
+      where: { id },
+    });
+    if (!patisserieFound) {
+      throw new NotFoundError(
+        "Ressource introuvable",
+        "Cette patisserie n'existe pas"
+      );
+    }
+
+    await patisserie.destroy({
+      where: { id },
+    });
+  },
 };
 module.exports = patisserieController;

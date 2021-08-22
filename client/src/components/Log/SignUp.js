@@ -15,11 +15,18 @@ const SignUp = () => {
     const usernameError = document.querySelector(".username.error");
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
+    const maildErrorregex = document.querySelector(".password.error");
     const passwordConfirmError = document.querySelector(
       ".password-confirm.error"
     );
     const termsError = document.querySelector(".terms.error");
     var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    // const mail =
+    //   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // //   if (!mail.test(email)) {
+    // //     maildErrorregex.innerHTML = "email non valide";
+    // //   }
+    //verifications
     if (!passw.test(password)) {
       passwordError.innerHTML =
         "Le mot de passe doit comporter  6 à 20 caractères contenant au moins un chiffre , une majuscule et une lettre minuscule";

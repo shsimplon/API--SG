@@ -5,6 +5,8 @@ const {
   getAllRestaurants,
   getRestaurant,
   addRestaurant,
+  updateRestaurant,
+  deleteOne,
 } = require("../controllers/restaurants_controller");
 const router = express.Router();
 
@@ -33,6 +35,22 @@ router.post("/", async (request, response) => {
     const newRestaurant = await addRestaurant(request.body);
     response.status(CREATED).json(newRestaurant);
   }
+});
+router.put("/:id", async (request, response) => {
+  const restaurant = request.body;
+
+  const restaurantUpdated = await updateRestaurant(
+    request.params.id,
+    restaurant
+  );
+  response.status(OK).json(restaurantUpdated);
+});
+
+router.delete("/:id", async (request, response) => {
+  await deleteOne(request.params.id);
+  response
+    .status(OK)
+    .json({ message: "Le restaurant  est supprimé avec succès" });
 });
 
 module.exports = router;

@@ -9,16 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.user, {
         foreignKey: "userId",
       });
-
-      //   models.jaime.belongsTo(models.user, {
-      //     foreignKey: "userId",
-      //     // as: "users",
-      //   });
-
-      //   models.jaime.belongsTo(models.recette, {
-      //     foreignKey: "recetteId",
-      //     // as: "recettes",
-      //   });
     }
   }
   jaime.init(

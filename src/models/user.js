@@ -8,13 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.recette, {
         foreignKey: "userId",
-        // as: "recettes",
       });
-      //   this.belongsToMany(models.recette, {
-      //     through: "jaimes",
-      //     foreignKey: "userId",
-      //     as: "users",
-      //   });
     }
   }
   user.init(
@@ -33,9 +27,9 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          isEmail: true,
-        },
+        // validate: {
+        //   isEmail: true,
+        // },
       },
 
       password: {

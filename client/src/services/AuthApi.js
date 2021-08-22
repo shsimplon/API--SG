@@ -17,6 +17,8 @@ api.interceptors.request.use((config) => {
 
 export default api;
 
+// proteger la route : ajouter recette
+
 export function hasAuthenticated() {
   const token = localStorage.getItem("jwt");
   console.log(token);
@@ -25,28 +27,3 @@ export function hasAuthenticated() {
   }
   return false;
 }
-
-//  export function login(credentials) {
-//     return axios
-//       .post(`${process.env.REACT_APP_API_URL}api/users/login`, credentials)
-//        .then(response => response)
-//     //  .then(token => {
-// //             addItem('miniblogToken', token);
-
-// //             return true;
-// //         });
-//  }
-
-//  export function logout() {
-//    removeItem('miniblogToken');
-//  }
-
-// function tokenIsValid(token) {
-//     const { exp: expiration } = jwtDecode(token);
-
-//     if (expiration * 1000 > new Date().getTime()) {
-//         return true;
-//     }
-
-//     return false;
-// }

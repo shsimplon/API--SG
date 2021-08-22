@@ -54,35 +54,4 @@ router.delete("/:id", isAuth, async (request, response) => {
   response.status(OK).json({ message: "L'user est supprimé avec succès" });
 });
 
-// router.get(
-//   "/logout/:id",
-//   (async = (request, response) => {
-//     response.cookie("jwt", "", { maxAge: 1 });
-//     response.redirect("/");
-//   })
-// );
-
-// router.get("/logout/:id", (request, response) => {
-//   response.clearCookie("jwt");
-//   response.redirect("/");
-// });
-
 module.exports = router;
-
-// const router = require("express").Router();
-
-// // Imports
-// var express      = require('express');
-// var users_controller    = require('../controllers/users_controller');
-// // var messagesCtrl = require('./routes/messagesCtrl');
-// // var likesCtrl    = require('./routes/likesCtrl');
-
-// // Router
-
-//   // Users routes
-//   router.post('/register',users_controller.register);
-//  router.post('/login',users_controller.login);
-//  router.get('/').get(users_controller.getUserProfile);
-//   // router.put('/userId').put(users_controller.updateUserProfile);
-
-//   module.exports = router;
