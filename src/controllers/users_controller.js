@@ -48,7 +48,7 @@ const userController = {
     });
     if (!User) {
       throw new NotFoundError(
-        "Ressource introuvable",
+        // "Ressource introuvable",
         "cet utilisateur n'existe pas"
       );
     }
