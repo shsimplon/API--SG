@@ -1,7 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import axios from "axios";
 import SignIn from "./SignIn";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
+
 const SignUp = () => {
   const [formSubmit, setFormSubmit] = useState(false);
   const [username, setUsername] = useState("");
@@ -16,43 +19,32 @@ const SignUp = () => {
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
     const maildErrorregex = document.querySelector(".password.error");
+    const usernameVideError = document.querySelector(".username.error");
     const passwordConfirmError = document.querySelector(
       ".password-confirm.error"
     );
     const termsError = document.querySelector(".terms.error");
     var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-    // const mail =
-    //   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // //   if (!mail.test(email)) {
-    // //     maildErrorregex.innerHTML = "email non valide";
-    // //   }
-    //verifications
-    if (!passw.test(password)) {
-      passwordError.innerHTML =
-        "Le mot de passe doit comporter  6 à 20 caractères contenant au moins un chiffre , une majuscule et une lettre minuscule";
-    } else if (
-      !password ||
-      password !== controlPassword ||
-      !terms.checked ||
-      !email ||
-      !username
-    ) {
-      if (password !== controlPassword) {
-        passwordConfirmError.innerHTML =
-          "Les mots de passe ne correspondent pas ";
-      }
-      if (password === null || password === "") {
-        passwordError.innerHTML = "password est  obligatoire";
-      }
 
-      if (!terms.checked)
-        termsError.innerHTML = "Veuillez valider les conditions générales";
-      if (username === null || username === "") {
-        usernameError.innerHTML = "username est obligatoire";
-      }
-      if (email === null || email === "") {
-        emailError.innerHTML = " email est obligatoire";
-      }
+    if (!password || !email || !username) {
+      toast.error("Veuillez valider tous les champs", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (!passw.test(password)) {
+      toast.error(
+        " Le mot de passe doit comporter  6 à 20 caractères contenant au moins un chiffre , une majuscule et une lettre minuscule",
+        {
+          position: toast.POSITION.TOP_CENTER,
+        }
+      );
+    } else if (password !== controlPassword) {
+      toast.error("Les mots de passe ne correspondent pas ", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (!terms.checked) {
+      toast.error("Veuillez valider les conditions générales", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     } else {
       await axios({
         method: "post",
@@ -73,7 +65,11 @@ const SignUp = () => {
             setFormSubmit(true);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((error) =>
+          toast.error(error.response.data.description, {
+            position: toast.POSITION.TOP_CENTER,
+          })
+        );
     }
   };
 
@@ -103,13 +99,14 @@ const SignUp = () => {
           <label htmlFor="email">Email</label>
           <br />
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
           <div className="email error"></div>
+
           <br />
           <label htmlFor="password">Mot de passe</label>
           <br />

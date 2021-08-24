@@ -12,8 +12,6 @@ module.exports = router;
 
 router.post("/", async (request, response) => {
   const Likes = request.body;
-  //   const userLiking = req.body.userId;
-  //   const recetteId = req.body.recetteId;
 
   const newLikes = await add(Likes);
   response.status(CREATED).json(newLikes);

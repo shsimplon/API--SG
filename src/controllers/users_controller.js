@@ -72,7 +72,7 @@ const userController = {
     });
 
     if (User) {
-      throw new BadRequestError("Ressource existante", "Ce User existe déjà");
+      throw new BadRequestError("Ressource existante", "Cet email existe déjà");
     }
     data.password = await getEncryptedPassword(password);
 

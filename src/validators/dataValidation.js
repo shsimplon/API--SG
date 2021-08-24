@@ -82,15 +82,3 @@ module.exports = (data) => {
   if (ingredientsError)
     errors.push({ field: "ingredients", message: ingredientsError });
 };
-//recette
-// const imageUpload = (data) => {
-//   if (data.image) {
-//     const mimeTypes = [/png/i, /jpj/i, /jpeg/i];
-
-//     if (mimeTypes.evrey((type) => !type.test(data.image.mimeTypes)))
-//       return "le format n'est pas compatible";
-//   }
-//   if (data.size.image >= 7000000) {
-//     return "le fichier est volumineux";
-//   }
-// };

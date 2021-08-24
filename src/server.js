@@ -1,8 +1,5 @@
-//import express
 const express = require("express");
 const fileUpload = require("express-fileupload");
-const bodyParser = require("body-parser");
-// const path = require("path");
 
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -12,11 +9,8 @@ const cookies = require("cookie-parser");
 const isAuth = require("./middlewares/auth.middleware");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-// var fs = require('fs');
 
 const routes = require("./routes");
-//middeleware
-//  const {checkUser,requireAuth} = require("./middlewares/isAuth");
 
 const { notFoundHandler, errorLogger, errorHandler } = require("./middlewares");
 //instantiate server
@@ -40,9 +34,6 @@ server.use(cookies());
 
 // Static Files
 server.use("/upload", express.static("public"));
-// server.use(fileUpload());
-
-// server.use(helmet.xssFilter());
 
 server.use("/api", routes);
 server.use(isAuth);

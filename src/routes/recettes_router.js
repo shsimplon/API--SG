@@ -46,13 +46,24 @@ router.get("/userRecette", isAuth, async (request, response) => {
 router.post("/upload", isAuth, async (req, res) => {
   const recetteToAdd = req.body;
   recetteToAdd.userId = req.user.id;
-  const errors = dataValidations(dataValidation);
-  if (errors) throw new ValidationError(errors);
+  console.log(recetteToAdd.name);
 
   if (!req.files) {
-    res.send({
-      status: false,
-      message: "No file uploaded",
+    return res.status(400).json({
+      message: "vous devez uploadez une image",
+    });
+  }
+  if (
+    req.files.avatar.mimetype != "image/jpg" &&
+    req.files.avatar.mimetype != "image/png" &&
+    req.files.avatar.mimetype != "image/jpeg"
+  ) {
+    return res.status(405).json({
+      message: "le format doit etre (jpg,png,jpeg)",
+    });
+  } else if (req.files.avatar.size > 1000000) {
+    return res.status(405).json({
+      message: "la taille doit etre inférieur à 10MB",
     });
   } else {
     let avatar = req.files.avatar;

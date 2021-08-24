@@ -1,5 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import api from "../services/AuthApi";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 const UploadRecette = (props) => {
   //   const [data, setData] = useState([]);
@@ -7,39 +11,34 @@ const UploadRecette = (props) => {
   const [name, setName] = useState();
   const [ingredients, setIngredients] = useState();
   const [preparations, setPreparations] = useState();
-  const [message, setMessage] = useState();
 
   const onSubmit = async (event, recette) => {
     event.preventDefault();
     const token = localStorage.getItem("jwt");
-
-    if (name == null || name == "") {
-      setMessage(" le name est obligatoire");
-    } else if (ingredients == null || ingredients == "") {
-      setMessage(" les ingrédients sont obligatoires");
-    } else if (preparations == null || preparations == "") {
-      setMessage(" les préparations sont obligatoires");
+    if (!ingredients || !preparations || !name) {
+      toast.error("Veuillez valider tous les champs", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
-    if (!message) {
-      const imgData = new FormData();
-      imgData.append("name", name);
-      imgData.append("avatar", avatar);
-      imgData.append("ingredients", ingredients);
-      imgData.append("preparations", preparations);
 
+    const imgData = new FormData();
+    imgData.append("name", name);
+    imgData.append("avatar", avatar);
+    imgData.append("ingredients", ingredients);
+    imgData.append("preparations", preparations);
+    try {
       const response = await api.post(`/api/recettes/upload`, imgData);
       props.setData([...props.data, response.data]);
+    } catch (error) {
+      console.log("ccc", error.response.data.message);
+      toast.error(error.response.data.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 
   return (
     <div>
-      {message && (
-        <p style={{ color: " rgb(220,52,68)", paddingLeft: "40px" }}>
-          {message}
-        </p>
-      )}
-
       <form
         action="/uploadfile"
         enctype="multipart/form-data"

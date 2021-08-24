@@ -4,6 +4,9 @@
 import React, { useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 import api from "../services/AuthApi";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 const DetailsRecettes = (props) => {
   const { recette } = props;
@@ -11,16 +14,18 @@ const DetailsRecettes = (props) => {
   //   const [likes, setLikes] = useState([]);
 
   const likeRecette = async (id, i) => {
-    await api
-      .post("api/likes", {
+    try {
+      await api.post("api/likes", {
         userId: localStorage.getItem("user"),
 
         recetteId: id,
-      })
-      .then((response) => {
-        console.log("cc");
-        window.location.reload();
       });
+      window.location.reload();
+    } catch (error) {
+      toast.error(error.response.data.description, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
 
   return (

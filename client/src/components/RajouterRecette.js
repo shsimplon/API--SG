@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RecetteDetails from "./RecetteDetails";
 import UploadRecette from "./UploadRecette";
+import Footer from "../components/Footer/Footer";
 
 const RajouterRecette = (props) => {
   const [data, setData] = useState([]);
@@ -35,6 +36,7 @@ const RajouterRecette = (props) => {
             })}
         </ul>
       </div>
+      <Footer />
     </>
   );
 };
