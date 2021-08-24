@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 // import { withRouter } from "react-router";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 const SignIn = (props) => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
-    const emailError = document.querySelector(".email.error");
-    const passwordError = document.querySelector(".password.error");
     if (!password || !email) {
-      if (password === null || password === "") {
-        passwordError.innerHTML = "password est  obligataoire";
-      }
-      if (email === null || email === "") {
-        emailError.innerHTML = " email est obligatoire";
-      }
+      toast.error("Veuillez valider tous les champs", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
     e.preventDefault();
     axios({
@@ -29,20 +27,23 @@ const SignIn = (props) => {
     })
       .then((res) => {
         console.log(res);
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-        } else {
-          localStorage.setItem("jwt", res.data.token);
-          localStorage.setItem("user", res.data.user.id);
-          console.log(res.data);
-          window.location = "/";
-          //   props.history.push("/");
-        }
+        // if (res.data.errors) {
+        //   emailError.innerHTML = res.data.errors.email;
+        //   passwordError.innerHTML = res.data.errors.password;
+        // } else {
+        localStorage.setItem("jwt", res.data.token);
+        localStorage.setItem("user", res.data.user.id);
+        console.log(res.data);
+        window.location = "/";
+        //   props.history.push("/");
+        //}
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((error) =>
+        //console.log(error.response.data));
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        })
+      );
   };
 
   return (

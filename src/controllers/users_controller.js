@@ -47,7 +47,10 @@ const userController = {
       attributes: { exclude: ["dateCreated"] },
     });
     if (!User) {
-      throw new NotFoundError("Ressource introuvable", "Ce User n'existe pas");
+      throw new NotFoundError(
+        "Ressource introuvable",
+        "cet utilisateur n'existe pas"
+      );
     }
 
     let correct = await bcrypt.compare(password, User.password);
@@ -58,7 +61,7 @@ const userController = {
       User.token = token;
       return User;
     } else {
-      throw new UnauthorizedError("Wrong Password");
+      throw new UnauthorizedError("Mot de passe n'est pas correct");
     }
   },
 

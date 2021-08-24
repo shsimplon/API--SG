@@ -18,12 +18,7 @@ const SignUp = () => {
     const usernameError = document.querySelector(".username.error");
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
-    const maildErrorregex = document.querySelector(".password.error");
-    const usernameVideError = document.querySelector(".username.error");
-    const passwordConfirmError = document.querySelector(
-      ".password-confirm.error"
-    );
-    const termsError = document.querySelector(".terms.error");
+
     var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
 
     if (!password || !email || !username) {
