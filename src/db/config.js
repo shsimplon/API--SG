@@ -5,7 +5,7 @@ module.exports = {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: "api-sans-Gluten",
-    host: "127.0.0.1",
+    host: "localhost",
     JWT_SECRET: process.env.JWT_SECRET,
     //  "JWT_SECRET" :"dzefrzegzegsgfzegfzrgLhhhhhhgfdgtjhgfdd./.Jfe",
 
